@@ -25,7 +25,7 @@ describe("SortedList", () => {
   });
 
   describe(".add()", () => {
-    it("should not accept items of the wrong type", () => {
+    it.skip("should not accept items of the wrong type", () => {
       // TODO
     });
 
@@ -115,25 +115,25 @@ describe("SortedList", () => {
       splicedNums.splice(removalIndex, 1);
       sortedNumList.remove(removalIndex);
 
-      expect(sortedNumList).toEqual(splicedNums);
+      expect(sortedNumList.items).toEqual(splicedNums);
     });
 
-    it("should error when called on an empty array and the array is empty", () => {
+    it.skip("should error when called on an empty array and the array is empty", () => {
       // TODO
     });
 
-    it("should error when passed a negative index", () => {
+    it.skip("should error when passed a negative index", () => {
       // TODO
     });
 
-    it("should error when array is not empty, and is passed an index beyond its end", () => {
+    it.skip("should error when array is not empty, and is passed an index beyond its end", () => {
       // TODO
     });
 
     // TODO in the future can return the item and use it to build an undo stack
   });
 
-  describe(".modify()", () => {
+  describe.skip(".modify()", () => {
     it("", () => {
       // TODO this function will modify the item and then immediately re-sort it
     });

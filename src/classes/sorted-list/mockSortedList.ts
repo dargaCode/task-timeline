@@ -3,12 +3,12 @@ import { Comparator } from "./sortedListUtils";
 /* numbers */
 
 export const ascendingNumberComparator: Comparator<number> = (a, b) => {
-  return b - a;
+  return a - b;
 };
 
 export const UNSORTED_NUMS = [2.67, 10, 12, 3, -23, 6, 20];
 // adding UNSORTED_NUMS in index order should return these indices in order:
-export const NUM_ADDED_INDICES = [0, 1, 2, 1, 1, 3, 6];
+export const NUM_ADDED_INDICES = [0, 1, 2, 1, 0, 3, 6];
 export const SORTED_NUMS = Array.from(UNSORTED_NUMS).sort(
   ascendingNumberComparator
 );
@@ -21,7 +21,7 @@ export interface Person {
 }
 
 export const ascendingPersonAgeComparator: Comparator<Person> = (a, b) => {
-  return b.age - a.age;
+  return a.age - b.age;
 };
 
 export const UNSORTED_PEOPLE = [
