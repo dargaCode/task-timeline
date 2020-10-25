@@ -9,7 +9,7 @@ import {
   UNSORTED_PEOPLE,
   PEOPLE_ADDED_INDICES,
   SORTED_PEOPLE
-} from "./mockSortedList";
+} from "./mockSortedListData";
 
 let sortedNumList: SortedList<number>;
 
