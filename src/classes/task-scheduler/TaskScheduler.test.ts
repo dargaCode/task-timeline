@@ -122,14 +122,16 @@ describe("TaskScheduler", () => {
   });
 
   describe(".tasks (getter)", () => {
-    it("should return a copy of the sortedList items", () => {
-      // todo now
+    it("should return a copy of the scheduler items", () => {
+      // they are copies, not the same ref
+      expect(scheduler.tasks).not.toBe(scheduler.tasks);
     });
   });
 
   describe(".lanes (getter)", () => {
-    it("should return a copy of the lanes", () => {
-      // todo now
+    it("should return a copy of the scheduler lanes", () => {
+      // they are copies, not the same ref
+      expect(scheduler.lanes).not.toBe(scheduler.lanes);
     });
   });
 
