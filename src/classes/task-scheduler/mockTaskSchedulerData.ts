@@ -1,4 +1,4 @@
-import { RawTaskInput, ScheduledTask, Lane } from "./taskSchedulerUtils";
+import { RawTaskInput, Task, Lane } from "./taskSchedulerUtils";
 
 /* initializing scheduler with starting tasks */
 
@@ -77,7 +77,7 @@ export const STARTING_TASK_INPUTS_UNSORTED: RawTaskInput[] = [
 ];
 
 // the starting tasks after they've been created and scheduled
-export const STARTING_TASKS_SCHEDULED: ScheduledTask[] = [
+export const STARTING_TASKS_SCHEDULED: Task[] = [
   {
     id: 1,
     start: "2018-01-01",
@@ -218,7 +218,7 @@ export const ADD_TASK_INPUT_NEW_LANE: RawTaskInput = {
 };
 
 // the resultant scheduled task from `ADD_TASK_INPUT_NEW_LANE`
-export const SCHEDULED_TASK_NEW_LANE: ScheduledTask = {
+export const SCHEDULED_TASK_NEW_LANE: Task = {
   id: 15,
   name: "task that requires a new lane",
   start: "2018-01-31",
