@@ -228,6 +228,7 @@ export const SCHEDULED_TASK_NEW_LANE: ScheduledTask = {
 };
 
 // a more space-efficient way to verify sort and lanes
+// shouldn't be used outside of test, so leaving it in mocks vs utils
 export interface ScheduleSummary {
   [key: number]: {
     sortIndex: number;
@@ -235,7 +236,7 @@ export interface ScheduleSummary {
   };
 }
 
-// resultant scheduling after adding `ADD_TASK_INPUT_NO_NEW_LANE`
+// resultant scheduling after adding `ADD_TASK_INPUT_NEW_LANE`
 export const SCHEDULE_SUMMARY_NEW_LANE: ScheduleSummary = {
   1: {
     sortIndex: 0,
@@ -299,7 +300,7 @@ export const SCHEDULE_SUMMARY_NEW_LANE: ScheduleSummary = {
   }
 };
 
-// resultant lanes after adding `ADD_TASK_INPUT_NO_NEW_LANE`
+// resultant lanes after adding `ADD_TASK_INPUT_NEW_LANE`
 export const ADD_TASK_INCREASED_LANES: Lane[] = [
   { nextFreeSlot: "2018-02-02" },
   { nextFreeSlot: "2018-02-17" },

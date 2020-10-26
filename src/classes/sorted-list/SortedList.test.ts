@@ -78,14 +78,12 @@ describe("SortedList", () => {
 
       const itemsCopyA: number[] = sortedNumList.items;
 
-      // if itemsCopyA is a copy, these changes won't be reflected in the SortedList's array
-      for (let i = 0; i < 10; i++) {
-        itemsCopyA.push(0);
-      }
+      // if itemsCopyA is a copy, this change won't be reflected in the SortedList's array
+      itemsCopyA.push(0);
 
       const itemsCopyB = sortedNumList.items;
 
-      expect(itemsCopyA).toHaveLength(SORTED_NUMS.length + 10);
+      expect(itemsCopyA).toHaveLength(SORTED_NUMS.length + 1);
       expect(itemsCopyA).not.toEqual(itemsCopyB);
       expect(itemsCopyB).toEqual(SORTED_NUMS);
     });
