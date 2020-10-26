@@ -4,11 +4,9 @@ export interface RawTaskInput {
   end: string;
 }
 
-export interface ScheduledTask {
+// when tasks are created from `RawTaskInput`, more fields are added
+export interface ScheduledTask extends RawTaskInput {
   id: number;
-  start: string;
-  end: string;
-  name: string;
   sortIndex: number;
   laneIndex: number;
 }

@@ -2,6 +2,7 @@ import { RawTaskInput, ScheduledTask, Lane } from "./taskSchedulerUtils";
 
 /* initializing scheduler with starting tasks */
 
+// starting task inputs to pass to the scheduler constructor
 export const STARTING_TASK_INPUTS_UNSORTED: RawTaskInput[] = [
   {
     start: "2018-01-01",
@@ -75,6 +76,7 @@ export const STARTING_TASK_INPUTS_UNSORTED: RawTaskInput[] = [
   }
 ];
 
+// the starting tasks after they've been created and scheduled
 export const STARTING_TASKS_SCHEDULED: ScheduledTask[] = [
   {
     id: 1,
@@ -215,7 +217,7 @@ export const ADD_TASK_INPUT_NEW_LANE: RawTaskInput = {
   end: "2018-02-01"
 };
 
-// the resultant scheduled task
+// the resultant scheduled task from `ADD_TASK_INPUT_NEW_LANE`
 export const SCHEDULED_TASK_NEW_LANE: ScheduledTask = {
   id: 15,
   name: "task that requires a new lane",
@@ -225,7 +227,7 @@ export const SCHEDULED_TASK_NEW_LANE: ScheduledTask = {
   laneIndex: 0
 };
 
-// more space-efficient way to verify sort and lanes
+// a more space-efficient way to verify sort and lanes
 export interface ScheduleSummary {
   [key: number]: {
     sortIndex: number;
@@ -233,6 +235,7 @@ export interface ScheduleSummary {
   };
 }
 
+// resultant scheduling after adding `ADD_TASK_INPUT_NO_NEW_LANE`
 export const SCHEDULE_SUMMARY_NEW_LANE: ScheduleSummary = {
   1: {
     sortIndex: 0,
@@ -296,6 +299,7 @@ export const SCHEDULE_SUMMARY_NEW_LANE: ScheduleSummary = {
   }
 };
 
+// resultant lanes after adding `ADD_TASK_INPUT_NO_NEW_LANE`
 export const ADD_TASK_INCREASED_LANES: Lane[] = [
   { nextFreeSlot: "2018-02-02" },
   { nextFreeSlot: "2018-02-17" },
