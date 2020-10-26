@@ -123,53 +123,53 @@ describe("TaskScheduler", () => {
 
   describe(".tasks (getter)", () => {
     it("should return a copy of the sortedList items", () => {
-      // todo
+      // todo now
     });
   });
 
   describe(".lanes (getter)", () => {
     it("should return a copy of the lanes", () => {
-      // todo
+      // todo now
     });
   });
 
   describe(".remove()", () => {
-    it("should remove the task with the given id from its tasks", () => {
+    it.skip("should remove the task with the given id from its tasks", () => {
       // todo
     });
 
-    it("should update the remaining tasks' sortIndex", () => {
+    it.skip("should update the remaining tasks' sortIndex", () => {
       // todo
     });
 
     describe("when removing it would result in empty lane(s)", () => {
-      it("should remove all empty lanes", () => {
+      it.skip("should remove all empty lanes", () => {
         // todo
       });
     });
 
     describe("when removing it would not result in empty lane(s)", () => {
-      it("should not remove any lanes", () => {
+      it.skip("should not remove any lanes", () => {
         // todo
       });
     });
 
-    it("should update the remaining tasks' laneIndex", () => {
+    it.skip("should update the remaining tasks' laneIndex", () => {
       // todo
     });
 
-    it("should update every lane's nextFreeSlot", () => {
+    it.skip("should update every lane's nextFreeSlot", () => {
       // todo
     });
   });
 
   describe(".modify()", () => {
-    it("should remove the task of the given id", () => {
+    it.skip("should remove the task of the given id", () => {
       // todo
     });
 
     // maybe this isn't ideal, since it would cause the event to have a new id
-    it("should add a new task with the updated properties", () => {
+    it.skip("should add a new task with the updated properties", () => {
       // todo
     });
   });
