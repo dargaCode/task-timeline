@@ -1,4 +1,6 @@
+import moment from "moment";
 import { RawTaskInput, Task, Lane } from "./taskSchedulerUtils";
+import { DATE_FORMAT } from "../../utils/dateConstants";
 
 /* initializing scheduler with starting tasks */
 
@@ -80,112 +82,112 @@ export const STARTING_TASK_INPUTS_UNSORTED: RawTaskInput[] = [
 export const STARTING_TASKS_SCHEDULED: Task[] = [
   {
     id: 1,
-    start: "2018-01-01",
-    end: "2018-01-05",
+    startDate: moment("2018-01-01", DATE_FORMAT),
+    endDate: moment("2018-01-05", DATE_FORMAT),
     name: "First item",
     sortIndex: 0,
     laneIndex: 0
   },
   {
     id: 2,
-    start: "2018-01-02",
-    end: "2018-01-08",
+    startDate: moment("2018-01-02", DATE_FORMAT),
+    endDate: moment("2018-01-08", DATE_FORMAT),
     name: "Second item",
     sortIndex: 1,
     laneIndex: 1
   },
   {
     id: 3,
-    start: "2018-01-06",
-    end: "2018-01-13",
+    startDate: moment("2018-01-06", DATE_FORMAT),
+    endDate: moment("2018-01-13", DATE_FORMAT),
     name: "Another item",
     sortIndex: 4,
     laneIndex: 0
   },
   {
     id: 4,
-    start: "2018-01-14",
-    end: "2018-01-14",
+    startDate: moment("2018-01-14", DATE_FORMAT),
+    endDate: moment("2018-01-14", DATE_FORMAT),
     name: "Another item",
     sortIndex: 9,
     laneIndex: 0
   },
   {
     id: 5,
-    start: "2018-02-01",
-    end: "2018-02-15",
+    startDate: moment("2018-02-01", DATE_FORMAT),
+    endDate: moment("2018-02-15", DATE_FORMAT),
     name: "Third item",
     sortIndex: 12,
     laneIndex: 4
   },
   {
     id: 6,
-    start: "2018-01-12",
-    end: "2018-02-16",
+    startDate: moment("2018-01-12", DATE_FORMAT),
+    endDate: moment("2018-02-16", DATE_FORMAT),
     name: "Fourth item with a super long name",
     sortIndex: 7,
     laneIndex: 1
   },
   {
     id: 7,
-    start: "2018-02-01",
-    end: "2018-02-02",
+    startDate: moment("2018-02-01", DATE_FORMAT),
+    endDate: moment("2018-02-02", DATE_FORMAT),
     name: "Fifth item with a super long name",
     sortIndex: 10,
     laneIndex: 0
   },
   {
     id: 8,
-    start: "2018-01-03",
-    end: "2018-01-05",
+    startDate: moment("2018-01-03", DATE_FORMAT),
+    endDate: moment("2018-01-05", DATE_FORMAT),
     name: "First item",
     sortIndex: 2,
     laneIndex: 3
   },
   {
     id: 9,
-    start: "2018-01-04",
-    end: "2018-01-08",
+    startDate: moment("2018-01-04", DATE_FORMAT),
+    endDate: moment("2018-01-08", DATE_FORMAT),
     name: "Second item",
     sortIndex: 3,
     laneIndex: 3
   },
   {
     id: 10,
-    start: "2018-01-06",
-    end: "2018-01-13",
+    startDate: moment("2018-01-06", DATE_FORMAT),
+    endDate: moment("2018-01-13", DATE_FORMAT),
     name: "Another item",
     sortIndex: 5,
     laneIndex: 2
   },
   {
     id: 11,
-    start: "2018-01-09",
-    end: "2018-01-09",
+    startDate: moment("2018-01-09", DATE_FORMAT),
+    endDate: moment("2018-01-09", DATE_FORMAT),
     name: "Another item",
     sortIndex: 6,
     laneIndex: 1
   },
   {
     id: 12,
-    start: "2018-02-01",
-    end: "2018-02-15",
+    startDate: moment("2018-02-01", DATE_FORMAT),
+    endDate: moment("2018-02-15", DATE_FORMAT),
     name: "Third item",
     sortIndex: 13,
     laneIndex: 5
   },
   {
     id: 13,
-    start: "2018-01-12",
-    end: "2018-02-16",
+    startDate: moment("2018-01-12", DATE_FORMAT),
+    endDate: moment("2018-02-16", DATE_FORMAT),
     name: "Fourth item with a super long name",
     sortIndex: 8,
     laneIndex: 3
   },
   {
     id: 14,
-    start: "2018-02-01",
-    end: "2018-02-02",
+    startDate: moment("2018-02-01", DATE_FORMAT),
+    endDate: moment("2018-02-02", DATE_FORMAT),
     name: "Fifth item with a super long name",
     sortIndex: 11,
     laneIndex: 2
@@ -221,8 +223,8 @@ export const ADD_TASK_INPUT_NEW_LANE: RawTaskInput = {
 export const SCHEDULED_TASK_NEW_LANE: Task = {
   id: 15,
   name: "task that requires a new lane",
-  start: "2018-01-31",
-  end: "2018-02-01",
+  startDate: moment("2018-01-31", DATE_FORMAT),
+  endDate: moment("2018-02-01", DATE_FORMAT),
   sortIndex: 10,
   laneIndex: 0
 };

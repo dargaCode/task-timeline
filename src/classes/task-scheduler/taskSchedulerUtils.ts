@@ -11,8 +11,8 @@ export interface RawTaskInput {
 export interface Task {
   id: number;
   name: string;
-  start: moment.Moment;
-  end: moment.Moment;
+  startDate: moment.Moment;
+  endDate: moment.Moment;
   sortIndex: number;
   laneIndex: number;
 }
@@ -28,19 +28,19 @@ export interface Lane {
  * @param b second task
  */
 export const taskComparator: Comparator<Task> = (a, b) => {
-  if (a.start.isBefore(b.start)) {
+  if (a.startDate.isBefore(b.startDate)) {
     return -1;
   }
 
-  if (a.start.isAfter(b.start)) {
+  if (a.startDate.isAfter(b.startDate)) {
     return 1;
   }
 
-  if (a.end.isBefore(b.end)) {
+  if (a.endDate.isBefore(b.endDate)) {
     return -1;
   }
 
-  if (a.end.isAfter(b.end)) {
+  if (a.endDate.isAfter(b.endDate)) {
     return 1;
   }
 
