@@ -9,6 +9,7 @@ import {
   SCHEDULE_SUMMARY_NEW_LANE,
   ADD_TASK_INCREASED_LANES
 } from "./mockTaskSchedulerData";
+import { DATE_FORMAT } from "../../utils/dateConstants";
 
 let scheduler: TaskScheduler;
 
@@ -48,7 +49,14 @@ describe("TaskScheduler", () => {
       });
 
       it("each lane should have the correct nextFreeSlot", () => {
-        expect(scheduler.lanes).toEqual(STARTING_TASK_LANES);
+        scheduler.lanes.forEach((lane, i) => {
+          const laneSlotDate = lane.nextFreeSlot.format(DATE_FORMAT);
+          const expectedLaneSlotDate = STARTING_TASK_LANES[
+            i
+          ].nextFreeSlot.format(DATE_FORMAT);
+
+          expect(laneSlotDate).toBe(expectedLaneSlotDate);
+        });
       });
     });
   });
