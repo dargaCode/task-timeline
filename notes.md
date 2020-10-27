@@ -78,9 +78,11 @@ Modifying an existing task would be slightly more complicated since it can move 
 TDD SortedList via its tests, mocks, and types.
 Need to now do the same for TaskScheduler.
 
-## Hour ~3
+## Hour ~3-4
 
-Working on tests for TaskScheduler.
+Working on tests, mocks, interfaces, comparator for TaskScheduler.
+
+I used this spreadsheet to help myself figure out what results I should be expecting as I scheduled the initial tasks, and added different tasks: [Task Timeline (Google Docs)](https://docs.google.com/spreadsheets/d/1qBlZiCEODFIL_fBinbPOV2eGyP6_jC64faaxF8f_A2s/edit)
 
 As you can see above, I thought that when a task was added/removed/modified, I'd be able to optimize which tasks were rescheduled into lanes. I wanted to only modify the tasks to the right of that time, for an admittedly small potential performance gain.
 
