@@ -18,8 +18,8 @@ export default class SortedList<T> {
   private getInsertionIndex(addItem: T): number {
     let insertionIndex: number | null = null;
 
-    // using a some loop since forEach can't be stopped early
-    this.itemList.some((item, i) => {
+    // use find rather than forEach so that it can break early
+    this.itemList.find((item, i) => {
       const comparison = this.comparator(item, addItem);
 
       // sort the item in front of identical items
@@ -30,7 +30,7 @@ export default class SortedList<T> {
         return true;
       }
 
-      // keep looping
+      // continue
       return false;
     });
 
