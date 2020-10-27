@@ -102,7 +102,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     endDate: moment("2018-01-05", DATE_FORMAT),
     name: "First item",
     sortIndex: 2,
-    laneIndex: 3
+    laneIndex: 2
   },
   {
     id: 9,
@@ -118,7 +118,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     endDate: moment("2018-01-13", DATE_FORMAT),
     name: "Another item",
     sortIndex: 4,
-    laneIndex: 2
+    laneIndex: 0
   },
   {
     id: 3,
@@ -126,7 +126,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     endDate: moment("2018-01-13", DATE_FORMAT),
     name: "Another item",
     sortIndex: 5,
-    laneIndex: 0
+    laneIndex: 2
   },
   {
     id: 11,
@@ -142,7 +142,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     endDate: moment("2018-02-16", DATE_FORMAT),
     name: "Fourth item with a super long name",
     sortIndex: 7,
-    laneIndex: 3
+    laneIndex: 1
   },
   {
     id: 6,
@@ -150,7 +150,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     endDate: moment("2018-02-16", DATE_FORMAT),
     name: "Fourth item with a super long name",
     sortIndex: 8,
-    laneIndex: 1
+    laneIndex: 3
   },
   {
     id: 4,
@@ -166,7 +166,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     endDate: moment("2018-02-02", DATE_FORMAT),
     name: "Fifth item with a super long name",
     sortIndex: 10,
-    laneIndex: 2
+    laneIndex: 0
   },
   {
     id: 7,
@@ -174,7 +174,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     endDate: moment("2018-02-02", DATE_FORMAT),
     name: "Fifth item with a super long name",
     sortIndex: 11,
-    laneIndex: 0
+    laneIndex: 2
   },
   {
     id: 12,
@@ -182,7 +182,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     endDate: moment("2018-02-15", DATE_FORMAT),
     name: "Third item",
     sortIndex: 12,
-    laneIndex: 5
+    laneIndex: 4
   },
   {
     id: 5,
@@ -190,7 +190,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     endDate: moment("2018-02-15", DATE_FORMAT),
     name: "Third item",
     sortIndex: 13,
-    laneIndex: 4
+    laneIndex: 5
   }
 ];
 
