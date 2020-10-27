@@ -195,12 +195,12 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
 ];
 
 export const STARTING_TASK_LANES: Lane[] = [
-  { nextFreeSlot: "2018-02-03" },
-  { nextFreeSlot: "2018-02-17" },
-  { nextFreeSlot: "2018-02-03" },
-  { nextFreeSlot: "2018-02-17" },
-  { nextFreeSlot: "2018-02-16" },
-  { nextFreeSlot: "2018-02-16" }
+  { nextFreeSlot: moment("2018-02-03", DATE_FORMAT) },
+  { nextFreeSlot: moment("2018-02-17", DATE_FORMAT) },
+  { nextFreeSlot: moment("2018-02-03", DATE_FORMAT) },
+  { nextFreeSlot: moment("2018-02-17", DATE_FORMAT) },
+  { nextFreeSlot: moment("2018-02-16", DATE_FORMAT) },
+  { nextFreeSlot: moment("2018-02-16", DATE_FORMAT) }
 ];
 
 /* adding new tasks */
@@ -304,11 +304,11 @@ export const SCHEDULE_SUMMARY_NEW_LANE: ScheduleSummary = {
 
 // resultant lanes after adding `ADD_TASK_DATA_NEW_LANE`
 export const ADD_TASK_INCREASED_LANES: Lane[] = [
-  { nextFreeSlot: "2018-02-02" },
-  { nextFreeSlot: "2018-02-17" },
-  { nextFreeSlot: "2018-02-03" },
-  { nextFreeSlot: "2018-02-17" },
-  { nextFreeSlot: "2018-02-03" },
-  { nextFreeSlot: "2018-02-16" },
-  { nextFreeSlot: "2018-02-16" }
+  { nextFreeSlot: moment("2018-02-02", DATE_FORMAT) },
+  { nextFreeSlot: moment("2018-02-17", DATE_FORMAT) },
+  { nextFreeSlot: moment("2018-02-03", DATE_FORMAT) },
+  { nextFreeSlot: moment("2018-02-17", DATE_FORMAT) },
+  { nextFreeSlot: moment("2018-02-03", DATE_FORMAT) },
+  { nextFreeSlot: moment("2018-02-16", DATE_FORMAT) },
+  { nextFreeSlot: moment("2018-02-16", DATE_FORMAT) }
 ];

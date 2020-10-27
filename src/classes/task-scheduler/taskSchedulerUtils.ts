@@ -18,7 +18,7 @@ export interface Task {
 }
 
 export interface Lane {
-  nextFreeSlot: string;
+  nextFreeSlot: moment.Moment;
 }
 
 /**
