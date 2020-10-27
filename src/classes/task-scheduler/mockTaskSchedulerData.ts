@@ -97,46 +97,6 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     laneIndex: 1
   },
   {
-    id: 3,
-    startDate: moment("2018-01-06", DATE_FORMAT),
-    endDate: moment("2018-01-13", DATE_FORMAT),
-    name: "Another item",
-    sortIndex: 4,
-    laneIndex: 0
-  },
-  {
-    id: 4,
-    startDate: moment("2018-01-14", DATE_FORMAT),
-    endDate: moment("2018-01-14", DATE_FORMAT),
-    name: "Another item",
-    sortIndex: 9,
-    laneIndex: 0
-  },
-  {
-    id: 5,
-    startDate: moment("2018-02-01", DATE_FORMAT),
-    endDate: moment("2018-02-15", DATE_FORMAT),
-    name: "Third item",
-    sortIndex: 12,
-    laneIndex: 4
-  },
-  {
-    id: 6,
-    startDate: moment("2018-01-12", DATE_FORMAT),
-    endDate: moment("2018-02-16", DATE_FORMAT),
-    name: "Fourth item with a super long name",
-    sortIndex: 7,
-    laneIndex: 1
-  },
-  {
-    id: 7,
-    startDate: moment("2018-02-01", DATE_FORMAT),
-    endDate: moment("2018-02-02", DATE_FORMAT),
-    name: "Fifth item with a super long name",
-    sortIndex: 10,
-    laneIndex: 0
-  },
-  {
     id: 8,
     startDate: moment("2018-01-03", DATE_FORMAT),
     endDate: moment("2018-01-05", DATE_FORMAT),
@@ -157,8 +117,16 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     startDate: moment("2018-01-06", DATE_FORMAT),
     endDate: moment("2018-01-13", DATE_FORMAT),
     name: "Another item",
-    sortIndex: 5,
+    sortIndex: 4,
     laneIndex: 2
+  },
+  {
+    id: 3,
+    startDate: moment("2018-01-06", DATE_FORMAT),
+    endDate: moment("2018-01-13", DATE_FORMAT),
+    name: "Another item",
+    sortIndex: 5,
+    laneIndex: 0
   },
   {
     id: 11,
@@ -169,28 +137,60 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     laneIndex: 1
   },
   {
-    id: 12,
-    startDate: moment("2018-02-01", DATE_FORMAT),
-    endDate: moment("2018-02-15", DATE_FORMAT),
-    name: "Third item",
-    sortIndex: 13,
-    laneIndex: 5
-  },
-  {
     id: 13,
     startDate: moment("2018-01-12", DATE_FORMAT),
     endDate: moment("2018-02-16", DATE_FORMAT),
     name: "Fourth item with a super long name",
-    sortIndex: 8,
+    sortIndex: 7,
     laneIndex: 3
+  },
+  {
+    id: 6,
+    startDate: moment("2018-01-12", DATE_FORMAT),
+    endDate: moment("2018-02-16", DATE_FORMAT),
+    name: "Fourth item with a super long name",
+    sortIndex: 8,
+    laneIndex: 1
+  },
+  {
+    id: 4,
+    startDate: moment("2018-01-14", DATE_FORMAT),
+    endDate: moment("2018-01-14", DATE_FORMAT),
+    name: "Another item",
+    sortIndex: 9,
+    laneIndex: 0
   },
   {
     id: 14,
     startDate: moment("2018-02-01", DATE_FORMAT),
     endDate: moment("2018-02-02", DATE_FORMAT),
     name: "Fifth item with a super long name",
-    sortIndex: 11,
+    sortIndex: 10,
     laneIndex: 2
+  },
+  {
+    id: 7,
+    startDate: moment("2018-02-01", DATE_FORMAT),
+    endDate: moment("2018-02-02", DATE_FORMAT),
+    name: "Fifth item with a super long name",
+    sortIndex: 11,
+    laneIndex: 0
+  },
+  {
+    id: 12,
+    startDate: moment("2018-02-01", DATE_FORMAT),
+    endDate: moment("2018-02-15", DATE_FORMAT),
+    name: "Third item",
+    sortIndex: 12,
+    laneIndex: 5
+  },
+  {
+    id: 5,
+    startDate: moment("2018-02-01", DATE_FORMAT),
+    endDate: moment("2018-02-15", DATE_FORMAT),
+    name: "Third item",
+    sortIndex: 13,
+    laneIndex: 4
   }
 ];
 
