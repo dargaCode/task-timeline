@@ -46,7 +46,7 @@ export default class SortedList<T> {
    * add the item to the sorted array and return its index
    * @param addItem
    */
-  add(addItem: T): number {
+  public add(addItem: T): number {
     const addIndex = this.getInsertionIndex(addItem);
 
     if (addIndex === this.itemList.length) {
@@ -61,7 +61,7 @@ export default class SortedList<T> {
   /**
    * return a copy of the sorted item list
    */
-  get items(): T[] {
+  public get items(): T[] {
     return Array.from(this.itemList);
   }
 
@@ -69,7 +69,7 @@ export default class SortedList<T> {
    * remove the item at the given index
    * @param removeIndex the index of the item to remove
    */
-  remove(removeIndex: number): void {
+  public remove(removeIndex: number): void {
     this.itemList.splice(removeIndex, 1);
   }
 }

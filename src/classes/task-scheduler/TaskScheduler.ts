@@ -38,7 +38,7 @@ export default class TaskScheduler {
     }
   }
 
-  getNextTaskId = (): number => {
+  private getNextTaskId = (): number => {
     const { nextTaskId } = this;
 
     this.nextTaskId += 1;
@@ -46,7 +46,7 @@ export default class TaskScheduler {
     return nextTaskId;
   };
 
-  generateTask = (rawTask: RawTaskData): Task => {
+  private generateTask = (rawTask: RawTaskData): Task => {
     const { name, start, end } = rawTask;
     const id = this.getNextTaskId();
 
@@ -60,7 +60,7 @@ export default class TaskScheduler {
     };
   };
 
-  getNextAvailableLaneIndex = (startDate: moment.Moment): number => {
+  private getNextAvailableLaneIndex = (startDate: moment.Moment): number => {
     if (!this.scheduledLanes) {
       return -1;
     }
@@ -72,7 +72,7 @@ export default class TaskScheduler {
     });
   };
 
-  scheduleTask = (task: Task): Task => {
+  private scheduleTask = (task: Task): Task => {
     const { startDate, endDate } = task;
     const newNextFreeSlot = getOneDayAfter(endDate);
 
@@ -95,7 +95,7 @@ export default class TaskScheduler {
     return scheduledTask;
   };
 
-  updateSchedule = (): void => {
+  private updateSchedule = (): void => {
     // create new lanes from scratch every time
     this.scheduledLanes = [];
 
@@ -105,7 +105,7 @@ export default class TaskScheduler {
     this.scheduledTasks = sortedTasks.map(this.scheduleTask);
   };
 
-  processStartingTasks = (startingTasksData: RawTaskData[]): void => {
+  private processStartingTasks = (startingTasksData: RawTaskData[]): void => {
     startingTasksData.forEach(taskData => {
       const task = this.generateTask(taskData);
 
@@ -115,7 +115,7 @@ export default class TaskScheduler {
     this.updateSchedule();
   };
 
-  add = (taskData: RawTaskData): Task => {
+  public add = (taskData: RawTaskData): Task => {
     const task = this.generateTask(taskData);
     const sortIndex = this.sortedTaskList.add(task);
 
@@ -124,11 +124,11 @@ export default class TaskScheduler {
     return this.scheduledTasks[sortIndex];
   };
 
-  get tasks(): Task[] {
+  public get tasks(): Task[] {
     return Array.from(this.scheduledTasks);
   }
 
-  get lanes(): Lane[] {
+  public get lanes(): Lane[] {
     return Array.from(this.scheduledLanes);
   }
 }
