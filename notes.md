@@ -20,19 +20,19 @@ I think the challenge here will be to keep the tasks in some kind of indexed, so
 
 After doing some drawings, I see a weird edgecase where adding tasks in a certain order can cause them to take up more rows than necessary.
 
-    [ first task ]          [ second task ]
-              [ third task ]
+    [ first task ]           [ second task ]
+              [ third task  ]
                   [ fourth task ]
 
 It should be possible to fit these tasks on two lanes only:
 
-    [            ][             ]
-              [            ][             ]
+    [            ][              ]
+              [             ][             ]
 
 I think starting with a pre-sorted list would fix this. If we apply the tasks in order of earliest to latest, they don't cause an unnecessary third lane:
 
-    [ first task ][ second task ]
-              [ third task ][ fourth task ]
+    [ first task ][  third task  ]
+              [ second task ][ fourth task ]
 
 ### How to schedule tasks in a performant way?
 
@@ -51,14 +51,14 @@ So this will work well for the initial set of tasks.
 
 If we want to add/modify/remove tasks after that, we'll have to keep the list sorted as it reflects those changes.
 
-Something like:
+Adding a task:
 
-1. When a new task is added, iterate through the sorted list until we find an task which begins after the new task ends.
-1. Insert the new task right before the task we found.
+1. When a new task is added, iterate through the sorted list until we find a task which begins <= the new task's beginning.
+1. Insert the new task into the array after the task we found.
    1. This way inserting the task will be as fast as possible, and we'll be able to keep working from a sorted list.
 1. Since we know all the tasks sorted before the new task can stay where they are, we only have to reschedule the new task and all the tasks after it.
 
-When deleting an task:
+Deleting a task:
 
 1. Remove it from the sorted list
 2. Reschedule all tasks later in the list.
@@ -77,3 +77,17 @@ Modifying an existing task would be slightly more complicated since it can move 
 
 TDD SortedList via its tests, mocks, and types.
 Need to now do the same for TaskScheduler.
+
+## Hour ~3-4
+
+Working on tests, mocks, interfaces, comparator for TaskScheduler.
+
+I used this spreadsheet to help myself figure out what results I should be expecting as I scheduled the initial tasks, and added different tasks: [Task Timeline (Google Docs)](https://docs.google.com/spreadsheets/d/1qBlZiCEODFIL_fBinbPOV2eGyP6_jC64faaxF8f_A2s/edit)
+
+As you can see above, I thought that when a task was added/removed/modified, I'd be able to optimize which tasks were rescheduled into lanes. I wanted to only modify the tasks to the right of that time, for an admittedly small potential performance gain.
+
+I'm realizing now, doing that would require keeping track of the openings in each lane at the moment each item is scheduled, so I can start at any point in the timeline, rather than the beginning. \[Think how memoizing helps with nth Fibonacci\]
+
+I think I could do this by building a stack of states, which would eventually be useful for undo/redo. I could maybe also bake the state of the lanes into each task as I schedule it.
+
+For the scope of this project I'll probably end up needing to leave it out. When a task is added/removed/modified, I'll fully clear every task from the lanes and reschedule all of them - for the time being anyway.

@@ -72,22 +72,8 @@ describe("SortedList", () => {
 
   describe(".items (getter)", () => {
     it("should return a copy of its array, not a ref to the array itself", () => {
-      UNSORTED_NUMS.forEach(num => {
-        sortedNumList.add(num);
-      });
-
-      const itemsCopyA: number[] = sortedNumList.items;
-
-      // if itemsCopyA is a copy, these changes won't be reflected in the SortedList's array
-      for (let i = 0; i < 10; i++) {
-        itemsCopyA.push(0);
-      }
-
-      const itemsCopyB = sortedNumList.items;
-
-      expect(itemsCopyA).toHaveLength(SORTED_NUMS.length + 10);
-      expect(itemsCopyA).not.toEqual(itemsCopyB);
-      expect(itemsCopyB).toEqual(SORTED_NUMS);
+      // they are copies, not the same ref
+      expect(sortedNumList.items).not.toBe(sortedNumList.items);
     });
   });
 
