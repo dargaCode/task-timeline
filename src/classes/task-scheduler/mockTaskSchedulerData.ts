@@ -249,52 +249,52 @@ export const SCHEDULE_SUMMARY_NEW_LANE: ScheduleSummary = {
     laneIndex: 1
   },
   3: {
-    sortIndex: 4,
-    laneIndex: 0
+    sortIndex: 5,
+    laneIndex: 2
   },
   4: {
     sortIndex: 9,
     laneIndex: 0
   },
   5: {
-    sortIndex: 13,
-    laneIndex: 5
+    sortIndex: 14,
+    laneIndex: 6
   },
   6: {
-    sortIndex: 7,
-    laneIndex: 1
+    sortIndex: 8,
+    laneIndex: 3
   },
   7: {
-    sortIndex: 11,
-    laneIndex: 2
+    sortIndex: 12,
+    laneIndex: 4
   },
   8: {
     sortIndex: 2,
-    laneIndex: 3
+    laneIndex: 2
   },
   9: {
     sortIndex: 3,
     laneIndex: 3
   },
   10: {
-    sortIndex: 5,
-    laneIndex: 2
+    sortIndex: 4,
+    laneIndex: 0
   },
   11: {
     sortIndex: 6,
     laneIndex: 1
   },
   12: {
-    sortIndex: 14,
-    laneIndex: 6
+    sortIndex: 13,
+    laneIndex: 5
   },
   13: {
-    sortIndex: 8,
-    laneIndex: 3
+    sortIndex: 7,
+    laneIndex: 1
   },
   14: {
-    sortIndex: 12,
-    laneIndex: 4
+    sortIndex: 11,
+    laneIndex: 2
   },
   15: {
     sortIndex: 10,
