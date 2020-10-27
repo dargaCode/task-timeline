@@ -6,15 +6,6 @@ import { getOneDayAfter } from "../../utils/dateUtils";
 
 const STARTING_TASK_ID = 1;
 
-const TEMP_DUMMY_TASK: Task = {
-  id: 2,
-  startDate: moment("2018-01-01", DATE_FORMAT),
-  endDate: moment("2018-01-01", DATE_FORMAT),
-  name: "Dummy Task",
-  sortIndex: 0,
-  laneIndex: 0
-};
-
 function updateSortIndices(tasks: Task[]): Task[] {
   return tasks.map(
     (task, i): Task => {
@@ -105,6 +96,9 @@ export default class TaskScheduler {
   };
 
   updateSchedule = (): void => {
+    // create new lanes from scratch every time
+    this.scheduledLanes = [];
+
     // taskList splices in each added item, so the sortIndices need to be updated
     const sortedTasks = updateSortIndices(this.sortedTaskList.items);
 
@@ -122,7 +116,12 @@ export default class TaskScheduler {
   };
 
   add = (taskData: RawTaskData): Task => {
-    return TEMP_DUMMY_TASK;
+    const task = this.generateTask(taskData);
+    const sortIndex = this.sortedTaskList.add(task);
+
+    this.updateSchedule();
+
+    return this.scheduledTasks[sortIndex];
   };
 
   get tasks(): Task[] {

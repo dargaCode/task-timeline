@@ -96,14 +96,6 @@ describe("TaskScheduler", () => {
       });
     });
 
-    describe("when it can't fit into any of the existing lanes", () => {
-      it("should create a new lane", () => {
-        scheduler.add(ADD_TASK_DATA_NEW_LANE);
-
-        expect(scheduler.lanes).toHaveLength(STARTING_TASK_LANES.length + 1);
-      });
-    });
-
     describe("when it can fit into one of the existing lanes", () => {
       it("should not create a new lane", () => {
         scheduler.add(ADD_TASK_DATA_NO_NEW_LANE);
@@ -112,10 +104,25 @@ describe("TaskScheduler", () => {
       });
     });
 
-    it("should update every lane's nextFreeSlot", () => {
-      scheduler.add(ADD_TASK_DATA_NO_NEW_LANE);
+    describe("when it can't fit into any of the existing lanes", () => {
+      it("should create a new lane", () => {
+        scheduler.add(ADD_TASK_DATA_NEW_LANE);
 
-      expect(scheduler.lanes).toEqual(ADD_TASK_INCREASED_LANES);
+        expect(scheduler.lanes).toHaveLength(STARTING_TASK_LANES.length + 1);
+      });
+    });
+
+    it("should update every lane's nextFreeSlot", () => {
+      scheduler.add(ADD_TASK_DATA_NEW_LANE);
+
+      scheduler.lanes.forEach((lane, i) => {
+        const laneSlotDate = lane.nextFreeSlot.format(DATE_FORMAT);
+        const expectedLaneSlotDate = ADD_TASK_INCREASED_LANES[
+          i
+        ].nextFreeSlot.format(DATE_FORMAT);
+
+        expect(laneSlotDate).toBe(expectedLaneSlotDate);
+      });
     });
   });
 
