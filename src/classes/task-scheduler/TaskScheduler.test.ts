@@ -48,9 +48,7 @@ describe("TaskScheduler", () => {
       });
 
       it("each lane should have the correct nextFreeSlot", () => {
-        scheduler.lanes.forEach((lane, i) => {
-          expect(lane.nextFreeSlot).toBe(STARTING_TASK_LANES[i].nextFreeSlot);
-        });
+        expect(scheduler.lanes).toEqual(STARTING_TASK_LANES);
       });
     });
   });
@@ -64,18 +62,10 @@ describe("TaskScheduler", () => {
       expect(scheduler.tasks).toHaveLength(oldTaskCount + 1);
     });
 
-    it("should return a ref to the new task", () => {
+    it("should create a new task with a unique id", () => {
       const scheduledTask = scheduler.add(ADD_TASK_DATA_NEW_LANE);
 
       expect(scheduledTask).toEqual(SCHEDULED_TASK_NEW_LANE);
-    });
-
-    it("should assign the new task a unique id", () => {
-      scheduler.add(ADD_TASK_DATA_NEW_LANE);
-
-      const uniqueIds = new Set(scheduler.tasks.map(task => task.id));
-
-      expect(uniqueIds.size).toEqual(scheduler.tasks.length);
     });
 
     it("should update every task's sortIndex", () => {
