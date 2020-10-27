@@ -1,10 +1,10 @@
 import TaskScheduler from "./TaskScheduler";
 import {
-  STARTING_TASK_INPUTS_UNSORTED,
+  STARTING_TASK_DATA_UNSORTED,
   STARTING_TASKS_SCHEDULED,
   STARTING_TASK_LANES,
-  ADD_TASK_INPUT_NO_NEW_LANE,
-  ADD_TASK_INPUT_NEW_LANE,
+  ADD_TASK_DATA_NO_NEW_LANE,
+  ADD_TASK_DATA_NEW_LANE,
   SCHEDULED_TASK_NEW_LANE,
   SCHEDULE_SUMMARY_NEW_LANE,
   ADD_TASK_INCREASED_LANES
@@ -14,11 +14,11 @@ let scheduler: TaskScheduler;
 
 describe("TaskScheduler", () => {
   beforeEach(() => {
-    scheduler = new TaskScheduler(STARTING_TASK_INPUTS_UNSORTED);
+    scheduler = new TaskScheduler(STARTING_TASK_DATA_UNSORTED);
   });
 
   describe("when instantiated", () => {
-    describe("when not passed startingTaskInputs", () => {
+    describe("when not passed startingTasksData", () => {
       beforeEach(() => {
         scheduler = new TaskScheduler();
       });
@@ -32,7 +32,7 @@ describe("TaskScheduler", () => {
       });
     });
 
-    describe("when passed startingTaskInputs", () => {
+    describe("when passed startingTasksData", () => {
       it("should create tasks with ascending ids (based on input order)", () => {
         scheduler.tasks.forEach((task, i) => {
           expect(task.id).toBe(STARTING_TASKS_SCHEDULED[i].id);
@@ -59,19 +59,19 @@ describe("TaskScheduler", () => {
     it("should add a new task", () => {
       const oldTaskCount = scheduler.tasks.length;
 
-      scheduler.add(ADD_TASK_INPUT_NEW_LANE);
+      scheduler.add(ADD_TASK_DATA_NEW_LANE);
 
       expect(scheduler.tasks).toHaveLength(oldTaskCount + 1);
     });
 
     it("should return a ref to the new task", () => {
-      const scheduledTask = scheduler.add(ADD_TASK_INPUT_NEW_LANE);
+      const scheduledTask = scheduler.add(ADD_TASK_DATA_NEW_LANE);
 
       expect(scheduledTask).toEqual(SCHEDULED_TASK_NEW_LANE);
     });
 
     it("should assign the new task a unique id", () => {
-      scheduler.add(ADD_TASK_INPUT_NEW_LANE);
+      scheduler.add(ADD_TASK_DATA_NEW_LANE);
 
       const uniqueIds = new Set(scheduler.tasks.map(task => task.id));
 
@@ -79,7 +79,7 @@ describe("TaskScheduler", () => {
     });
 
     it("should update every task's sortIndex", () => {
-      scheduler.add(ADD_TASK_INPUT_NEW_LANE);
+      scheduler.add(ADD_TASK_DATA_NEW_LANE);
 
       scheduler.tasks.forEach(task => {
         const { id, sortIndex } = task;
@@ -89,7 +89,7 @@ describe("TaskScheduler", () => {
     });
 
     it("should reschedule all tasks, including the new one", () => {
-      scheduler.add(ADD_TASK_INPUT_NEW_LANE);
+      scheduler.add(ADD_TASK_DATA_NEW_LANE);
 
       scheduler.tasks.forEach(task => {
         const { id, laneIndex } = task;
@@ -100,7 +100,7 @@ describe("TaskScheduler", () => {
 
     describe("when it can't fit into any of the existing lanes", () => {
       it("should create a new lane", () => {
-        scheduler.add(ADD_TASK_INPUT_NEW_LANE);
+        scheduler.add(ADD_TASK_DATA_NEW_LANE);
 
         expect(scheduler.lanes).toHaveLength(STARTING_TASK_LANES.length + 1);
       });
@@ -108,14 +108,14 @@ describe("TaskScheduler", () => {
 
     describe("when it can fit into one of the existing lanes", () => {
       it("should not create a new lane", () => {
-        scheduler.add(ADD_TASK_INPUT_NO_NEW_LANE);
+        scheduler.add(ADD_TASK_DATA_NO_NEW_LANE);
 
         expect(scheduler.lanes).toHaveLength(STARTING_TASK_LANES.length);
       });
     });
 
     it("should update every lane's nextFreeSlot", () => {
-      scheduler.add(ADD_TASK_INPUT_NO_NEW_LANE);
+      scheduler.add(ADD_TASK_DATA_NO_NEW_LANE);
 
       expect(scheduler.lanes).toEqual(ADD_TASK_INCREASED_LANES);
     });

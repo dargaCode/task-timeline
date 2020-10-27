@@ -1,11 +1,11 @@
 import moment from "moment";
-import { RawTaskInput, Task, Lane } from "./taskSchedulerUtils";
+import { RawTaskData, Task, Lane } from "./taskSchedulerUtils";
 import { DATE_FORMAT } from "../../utils/dateConstants";
 
 /* initializing scheduler with starting tasks */
 
-// starting task inputs to pass to the scheduler constructor
-export const STARTING_TASK_INPUTS_UNSORTED: RawTaskInput[] = [
+// starting task data to pass to the scheduler constructor
+export const STARTING_TASK_DATA_UNSORTED: RawTaskData[] = [
   {
     start: "2018-01-01",
     end: "2018-01-05",
@@ -205,21 +205,21 @@ export const STARTING_TASK_LANES: Lane[] = [
 
 /* adding new tasks */
 
-// input to pass to .add()
-export const ADD_TASK_INPUT_NO_NEW_LANE: RawTaskInput = {
+// task data to pass to .add()
+export const ADD_TASK_DATA_NO_NEW_LANE: RawTaskData = {
   name: "task that fits within existing lanes",
   start: "2018-01-18",
   end: "2018-01-24"
 };
 
-// input to pass to .add()
-export const ADD_TASK_INPUT_NEW_LANE: RawTaskInput = {
+// task data to pass to .add()
+export const ADD_TASK_DATA_NEW_LANE: RawTaskData = {
   name: "task that requires a new lane",
   start: "2018-01-31",
   end: "2018-02-01"
 };
 
-// the resultant scheduled task from `ADD_TASK_INPUT_NEW_LANE`
+// the resultant scheduled task from `ADD_TASK_DATA_NEW_LANE`
 export const SCHEDULED_TASK_NEW_LANE: Task = {
   id: 15,
   name: "task that requires a new lane",
@@ -238,7 +238,7 @@ export interface ScheduleSummary {
   };
 }
 
-// resultant scheduling after adding `ADD_TASK_INPUT_NEW_LANE`
+// resultant scheduling after adding `ADD_TASK_DATA_NEW_LANE`
 export const SCHEDULE_SUMMARY_NEW_LANE: ScheduleSummary = {
   1: {
     sortIndex: 0,
@@ -302,7 +302,7 @@ export const SCHEDULE_SUMMARY_NEW_LANE: ScheduleSummary = {
   }
 };
 
-// resultant lanes after adding `ADD_TASK_INPUT_NEW_LANE`
+// resultant lanes after adding `ADD_TASK_DATA_NEW_LANE`
 export const ADD_TASK_INCREASED_LANES: Lane[] = [
   { nextFreeSlot: "2018-02-02" },
   { nextFreeSlot: "2018-02-17" },

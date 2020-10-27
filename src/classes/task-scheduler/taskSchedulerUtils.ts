@@ -1,13 +1,13 @@
 import moment from "moment";
 import { Comparator } from "../sorted-list/sortedListUtils";
 
-export interface RawTaskInput {
+export interface RawTaskData {
   name: string;
   start: string;
   end: string;
 }
 
-// when tasks are created from `RawTaskInput`, more fields are added
+// when tasks are created from `RawTaskData`, more fields are added
 export interface Task {
   id: number;
   name: string;
