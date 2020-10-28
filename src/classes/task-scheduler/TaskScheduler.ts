@@ -18,6 +18,13 @@ function updateSortIndices(tasks: Task[]): Task[] {
   );
 }
 
+/**
+ * task scheduler converts raw task data into tasks, and schedules
+ * those tasks in as few lanes as possible.
+ *
+ * it uses a sorted list of tasks to keep the tasks always sorted,
+ * which is important for making scheduling the tasks predictably.
+ */
 export default class TaskScheduler {
   private sortedTaskList: SortedList<Task>;
 
@@ -38,6 +45,9 @@ export default class TaskScheduler {
     }
   }
 
+  /**
+   *
+   */
   private getNextTaskId = (): number => {
     const { nextTaskId } = this;
 
@@ -46,6 +56,10 @@ export default class TaskScheduler {
     return nextTaskId;
   };
 
+  /**
+   *
+   * @param rawTask
+   */
   private generateTask = (rawTask: RawTaskData): Task => {
     const { name, start, end } = rawTask;
     const id = this.getNextTaskId();
@@ -60,6 +74,10 @@ export default class TaskScheduler {
     };
   };
 
+  /**
+   *
+   * @param startDate
+   */
   private getNextAvailableLaneIndex = (startDate: moment.Moment): number => {
     if (!this.scheduledLanes) {
       return -1;
@@ -72,6 +90,10 @@ export default class TaskScheduler {
     });
   };
 
+  /**
+   *
+   * @param task
+   */
   private scheduleTask = (task: Task): Task => {
     const { startDate, endDate } = task;
     const newNextFreeSlot = getOneDayAfter(endDate);
@@ -95,6 +117,9 @@ export default class TaskScheduler {
     return scheduledTask;
   };
 
+  /**
+   *
+   */
   private updateSchedule = (): void => {
     // create new lanes from scratch every time
     this.scheduledLanes = [];
@@ -105,6 +130,10 @@ export default class TaskScheduler {
     this.scheduledTasks = sortedTasks.map(this.scheduleTask);
   };
 
+  /**
+   *
+   * @param startingTasksData
+   */
   private processStartingTasks = (startingTasksData: RawTaskData[]): void => {
     startingTasksData.forEach(taskData => {
       const task = this.generateTask(taskData);
@@ -115,6 +144,10 @@ export default class TaskScheduler {
     this.updateSchedule();
   };
 
+  /**
+   *
+   * @param taskData
+   */
   public add = (taskData: RawTaskData): Task => {
     const task = this.generateTask(taskData);
     const sortIndex = this.sortedTaskList.add(task);
@@ -124,10 +157,16 @@ export default class TaskScheduler {
     return this.scheduledTasks[sortIndex];
   };
 
+  /**
+   * getter for the scheduled tasks
+   */
   public get tasks(): Task[] {
     return Array.from(this.scheduledTasks);
   }
 
+  /**
+   * getter for the scheduled lanes
+   */
   public get lanes(): Lane[] {
     return Array.from(this.scheduledLanes);
   }
