@@ -43,13 +43,6 @@ export default class TimelineContainer extends React.Component<{}, State> {
   render(): JSX.Element {
     const { tasks, laneCount } = this.state;
 
-    return (
-      <div>
-        <h1>{laneCount}</h1>
-        <h1>Tasks</h1>
-
-        <TimelineGrid tasks={tasks} />
-      </div>
-    );
+    return <TimelineGrid tasks={tasks} laneCount={laneCount} />;
   }
 }
