@@ -25,9 +25,9 @@ export default class TimelineGrid extends React.Component<Props, State> {
 
     // todo move this up one level? Add logic into TaskScheduler to track earliest and latest dates
     // then these won't be hardcoded
-    const startDate = moment("2018-01-01", DATE_FORMAT);
+    const timelineStartDate = moment("2018-01-01", DATE_FORMAT);
 
-    const columnDates = getNSequentialDays(startDate, 10);
+    const columnDates = getNSequentialDays(timelineStartDate, 10);
 
     return (
       <div className={styles.container}>
@@ -46,8 +46,12 @@ export default class TimelineGrid extends React.Component<Props, State> {
           {/* todo extract to Task component */}
           {/* todo convert task start/end dates to grid columns */}
           {tasks.map(task => {
-            const { name, laneIndex, id } = task;
+            const { name, laneIndex, id, startDate, endDate } = task;
             const rowNum = laneIndex + 1;
+
+            // todo delete me
+            const startDateText = startDate.format("M/D");
+            const endDateText = endDate.format("M/D");
 
             return (
               <div
@@ -55,7 +59,7 @@ export default class TimelineGrid extends React.Component<Props, State> {
                 className={styles.task}
                 style={{ gridRow: `${rowNum}` }}
               >
-                {id} {name}
+                ({startDateText}-{endDateText}) {id}: {name}
               </div>
             );
           })}
