@@ -58,6 +58,7 @@ module.exports = [
   "js",
   "jsx",
   "init",
+  "li",
   "lifecycle",
   "linter",
   "linkedin",
