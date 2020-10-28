@@ -1,31 +1,29 @@
 @use "../../config";
 
 .container {
-  background: config.$body-text-color;
+  margin: 40px;
+}
+
+.date-row {
+  display: grid;
+  grid-row-gap: 10px;
+  grid-template-columns: repeat(10, 10%);
+}
+
+.date {
+  grid-row: 1;
+  text-align: center;
 }
 
 .grid {
+  background: lightgray;
   display: grid;
-  grid-column-gap: 10px;
   grid-row-gap: 10px;
-  grid-template-columns: repeat(6, config.$base-width-unit);
-  grid-template-rows: repeat(6, config.$base-width-unit / 3);
+  grid-template-columns: repeat(10, 10%);
 }
 
-.wide {
-  background: red;
-  grid-column: 1 / span 4;
-  grid-row: 1;
-}
-
-.tall {
-  background: green;
-  grid-column: 3 / span 3;
-  grid-row: 0;
-}
-
-.short {
-  background: blue;
-  grid-column: 3;
-  grid-row: 3;
+.task {
+  background: #999;
+  border: 1px solid black;
+  color: #eee;
 }
