@@ -1,4 +1,66 @@
-# Development Notes
+# Readme
+
+## NPM scripts
+
+> npm install
+
+Install dependencies
+
+> npm run start
+
+Create a server at https://localhost:8080/
+
+> npm run test
+
+Run all jest tests
+
+> npm run lint
+
+Run eslint, prettier, and stylelint for all files.
+
+## Questionnaire
+
+#### How long did you spend?
+
+This project is in a pretty unfinished state, and I plan to complete it as a fully fleshed-out project.
+
+Unfortunately ended up overbooked with interviews and another test this week, so I wasn't able to spend as much time as I was intending. I had planned to really over-deliver on this project, which is why the initial aspects are very thoroughly done, and the React components themselves are basically prototypes.
+
+I spent 10-12 hours on this project, if I include code, tests, mock data, etc. I was actually hoping to spend around 20 hours, and end up with a very polished result.
+
+I should also note that I copied my Webpack build/setup from my template repo which I've been building from scratch over time: https://github.com/dargaCode/webpack-react-template
+
+#### What do you like about your implementation?
+
+I enjoyed the design process for this project, and implementing the data logic via TDD.
+
+While writing this project, I treated it as close to production code as I could. I wanted to give examples of the way I work, particularly TDD and high test coverage.
+
+I try to make all of my code easy to read and very reusable. I also incorporated TypeScript, which is a time investment up front for a more stable end result.
+
+Ultimately I think this style of working is representative of how I am as a teammate.
+
+#### What would you change if you were going to do it again?
+
+Of course all of those ways of working take a lot longer than a more quick and dirty prototype, which I think is what's usually intended for tests like this.
+
+I would have kept my week lighter in terms of other interviews and tests which ended up eating into the time I had allotted for this.
+
+One of the first things I could have de-scoped was writing and testing my own SortedList component, which was really just for fun. Same with some of the more thorough test coverage.
+
+On the other hand, I usually use Storybook to build my components, which isn't represented here.
+
+#### How did you make your design decisions?
+
+See Detailed Development Notes below.
+
+#### How would you test this?
+
+I practice TDD when I'm writing production code, so you can see several jest files which give examples of that. I specced out 40 tests for the SortedList, TaskScheduler, and some Utilities, 27 of which I fully implemented and 13 are TODO.
+
+As I continue working on this project, I'll add similar test coverage for all the React components I write. Those are only unit tests though, so we could eventually add some end-to-end integration tests in Selenium.
+
+# Detailed Development Notes
 
 I'll try to track my thought process here as I work on it.
 
