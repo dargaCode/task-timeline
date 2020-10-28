@@ -16,7 +16,7 @@ In the most brute-force solution, I think there would be lots of quadratic time 
 
 I think the challenge here will be to keep the tasks in some kind of indexed, sorted, or memoized state, so they can be easily modified without completely recalculating every position with every change.
 
-## Hour 1
+## Day 1
 
 After doing some drawings, I see a weird edgecase where adding tasks in a certain order can cause them to take up more rows than necessary.
 
@@ -73,12 +73,12 @@ Modifying an existing task would be slightly more complicated since it can move 
 
 \[This will p task weird holes and inconsistencies from appearing in the list. The unoptimized way would be to just reschedule every task in the list every single time something changes. Depending on the typical size of datasets for this app, doing it the unoptimized way could work fine and cause no performance issues.\]
 
-## Hour ~2
+## Day 2
 
 TDD SortedList via its tests, mocks, and types.
 Need to now do the same for TaskScheduler.
 
-## Hour ~3-4
+## Day 3
 
 Working on tests, mocks, interfaces, comparator for TaskScheduler.
 
@@ -91,3 +91,99 @@ I'm realizing now, doing that would require keeping track of the openings in eac
 I think I could do this by building a stack of states, which would eventually be useful for undo/redo. I could maybe also bake the state of the lanes into each task as I schedule it.
 
 For the scope of this project I'll probably end up needing to leave it out. When a task is added/removed/modified, I'll fully clear every task from the lanes and reschedule all of them - for the time being anyway.
+
+## Day 4
+
+All done with the non-react classes, time to make the visuals.
+
+### Brainstorming functionality
+
+- Overall timeline
+
+  - contains lanes
+  - List of Dates (columns)
+  - Add task button
+    - event - start creating task
+  - add/edit form
+
+- Lanes (rows)
+
+  - contains tasks
+
+- Task
+
+  - name (truncated)
+  - grid coordinates - start
+  - grid coordinates - end
+  - special hover?
+  - color for editing mode
+  - events
+    - click / start editing
+    - delete
+
+- Add/Edit form
+  - Date range selector (click a calendar)
+    - start and end date
+  - Name input
+  - Save / Add button
+  - form validation for required options?
+  - delete button
+  - events
+    - submit / create
+    - submit / save
+    - change start date
+    - change end date
+    - delete
+    - cancel / deselect
+
+### Actual components
+
+TimelineContainer
+
+- fetch starting tasks
+  - in a real app this would be an api call
+  - here it will be loaded from a file
+- create a TaskScheduler
+  - pass it the starting tasks
+- props
+  - none
+- state
+  - scheduled tasks
+  - lane count
+- children
+  - TimelineTable
+  - Add/Edit form
+
+TimelineGrid
+
+- control zoom / scroll in the future
+- convert task start/end/lane to grid coordinates
+- props
+  - scheduled tasks
+  - number of rows / lanes
+  - number of columns / dates
+- state
+  - first date displayed
+  - last date displayed
+  - task being edited
+- children
+  - tasks
+
+Task
+
+- props
+  - color
+  - name
+  - row
+  - start column
+  - end column
+  - is being edited? (change color)
+- state
+  - none
+- elements
+  - name text
+- children
+  - none
+  - maybe delete button in the future
+- click
+  - begin editing

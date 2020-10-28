@@ -1,0 +1,29 @@
+@use "../../config";
+
+.container {
+  margin: 40px;
+}
+
+.date-row {
+  display: grid;
+  grid-row-gap: 10px;
+  grid-template-columns: repeat(10, 10%);
+}
+
+.date {
+  grid-row: 1;
+  text-align: center;
+}
+
+.grid {
+  background: lightgray;
+  display: grid;
+  grid-row-gap: 10px;
+  grid-template-columns: repeat(10, 10%);
+}
+
+.task {
+  background: #999;
+  border: 1px solid black;
+  color: #eee;
+}
