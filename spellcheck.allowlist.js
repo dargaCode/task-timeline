@@ -58,6 +58,8 @@ module.exports = [
   "js",
   "jsx",
   "init",
+  "hardcoded",
+  "hardcoding",
   "li",
   "lifecycle",
   "linter",
