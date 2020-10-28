@@ -1,23 +1,18 @@
 import React from "react";
 import TaskScheduler from "../../classes/task-scheduler/TaskScheduler";
-import {
-  Task,
-  RawTaskData
-} from "../../classes/task-scheduler/taskSchedulerUtils";
+import { Task } from "../../classes/task-scheduler/taskSchedulerUtils";
 import { STARTING_TASKS } from "../timeline-data";
 import { DATE_FORMAT } from "../../utils/dateConstants";
-
-interface Props {}
 
 interface State {
   tasks: Task[];
   laneCount: number;
 }
 
-export default class TimelineContainer extends React.Component<Props, State> {
+export default class TimelineContainer extends React.Component<{}, State> {
   private scheduler: TaskScheduler | undefined;
 
-  constructor(props: Props) {
+  constructor(props: {}) {
     super(props);
 
     this.scheduler = undefined;
