@@ -215,16 +215,16 @@ export const ADD_TASK_DATA_NO_NEW_LANE: RawTaskData = {
 // task data to pass to .add()
 export const ADD_TASK_DATA_NEW_LANE: RawTaskData = {
   name: "task that requires a new lane",
-  start: "2018-01-31",
-  end: "2018-02-01"
+  start: "2018-01-21",
+  end: "2018-02-17"
 };
 
 // the resultant scheduled task from `ADD_TASK_DATA_NEW_LANE`
 export const SCHEDULED_TASK_NEW_LANE: Task = {
   id: 15,
   name: "task that requires a new lane",
-  startDate: moment("2018-01-31", DATE_FORMAT),
-  endDate: moment("2018-02-01", DATE_FORMAT),
+  startDate: moment("2018-01-21", DATE_FORMAT),
+  endDate: moment("2018-02-17", DATE_FORMAT),
   sortIndex: 10,
   laneIndex: 0
 };
@@ -304,7 +304,7 @@ export const SCHEDULE_SUMMARY_NEW_LANE: ScheduleSummary = {
 
 // resultant lanes after adding `ADD_TASK_DATA_NEW_LANE`
 export const ADD_TASK_INCREASED_LANES: Lane[] = [
-  { nextFreeSlot: moment("2018-02-02", DATE_FORMAT) },
+  { nextFreeSlot: moment("2018-02-18", DATE_FORMAT) },
   { nextFreeSlot: moment("2018-02-17", DATE_FORMAT) },
   { nextFreeSlot: moment("2018-02-03", DATE_FORMAT) },
   { nextFreeSlot: moment("2018-02-17", DATE_FORMAT) },
