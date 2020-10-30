@@ -13,6 +13,11 @@ import { getOneDayAfter } from "../../utils/dateUtils";
 
 const STARTING_TASK_ID = 1;
 
+/**
+ * as tasks are spliced in and out of their array, they
+ * can become out of sync with their sort indices.
+ * @param tasks
+ */
 function updateSortIndices(tasks: Task[]): Task[] {
   return tasks.map(
     (task, i): Task => {
