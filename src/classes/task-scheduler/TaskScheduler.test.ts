@@ -1,13 +1,16 @@
 import TaskScheduler from "./TaskScheduler";
 import {
+  EMPTY_DATE_RANGE,
   STARTING_TASKS_DATA_UNSORTED,
   STARTING_TASKS_SCHEDULED,
+  STARTING_TASKS_DATE_RANGE,
   STARTING_TASKS_LANES,
   ADD_TASK_DATA_NO_NEW_LANE,
   ADD_TASK_DATA_NEW_LANE,
   SCHEDULED_TASK_NEW_LANE,
   SCHEDULE_SUMMARY_NEW_LANE,
-  ADD_TASK_INCREASED_LANES
+  ADD_TASK_INCREASED_LANES,
+  ADD_TASK_NEW_LANE_INCREASED_DATE_RANGE
 } from "./mockTaskSchedulerData";
 import { DATE_FORMAT } from "../../utils/dateConstants";
 
@@ -31,6 +34,10 @@ describe("TaskScheduler", () => {
       it("should not create any lanes", () => {
         expect(scheduler.lanes).toEqual([]);
       });
+
+      it("should not populate its date range", () => {
+        expect(scheduler.dateRange).toEqual(EMPTY_DATE_RANGE);
+      });
     });
 
     describe("when passed startingTasksData", () => {
@@ -40,23 +47,27 @@ describe("TaskScheduler", () => {
         });
       });
 
-      it("should schedule all the new tasks in the correct lanes", () => {
+      it("should schedule all the tasks in the correct lanes", () => {
         expect(scheduler.tasks).toEqual(STARTING_TASKS_SCHEDULED);
       });
 
       it("should create the correct amount of lanes", () => {
-        expect(scheduler.lanes).toHaveLength(STARTING_TASK_LANES.length);
+        expect(scheduler.lanes).toHaveLength(STARTING_TASKS_LANES.length);
       });
 
       it("each lane should have the correct nextFreeSlot", () => {
         scheduler.lanes.forEach((lane, i) => {
           const laneSlotDate = lane.nextFreeSlot.format(DATE_FORMAT);
-          const expectedLaneSlotDate = STARTING_TASK_LANES[
+          const expectedLaneSlotDate = STARTING_TASKS_LANES[
             i
           ].nextFreeSlot.format(DATE_FORMAT);
 
           expect(laneSlotDate).toBe(expectedLaneSlotDate);
         });
+      });
+
+      it("should track the overall date range", () => {
+        expect(scheduler.dateRange).toEqual(STARTING_TASKS_DATE_RANGE);
       });
     });
   });
@@ -124,12 +135,37 @@ describe("TaskScheduler", () => {
         expect(laneSlotDate).toBe(expectedLaneSlotDate);
       });
     });
+
+    describe("when the task's dates are between existing tasks", () => {
+      it("should not increase the date range", () => {
+        scheduler.add(ADD_TASK_DATA_NO_NEW_LANE);
+
+        expect(scheduler.dateRange).toEqual(STARTING_TASKS_DATE_RANGE);
+      });
+    });
+
+    describe("when the task's dates extend beyond existing tasks", () => {
+      it("should increase the date range to match", () => {
+        scheduler.add(ADD_TASK_DATA_NEW_LANE);
+
+        expect(scheduler.dateRange).toEqual(
+          ADD_TASK_NEW_LANE_INCREASED_DATE_RANGE
+        );
+      });
+    });
   });
 
   describe(".tasks (getter)", () => {
     it("should return a copy of the scheduler items", () => {
       // they are copies, not the same ref
       expect(scheduler.tasks).not.toBe(scheduler.tasks);
+    });
+  });
+
+  describe(".dateRange (getter)", () => {
+    it("should return a copy of the scheduler date range", () => {
+      // they are copies, not the same ref
+      expect(scheduler.dateRange).not.toBe(scheduler.dateRange);
     });
   });
 

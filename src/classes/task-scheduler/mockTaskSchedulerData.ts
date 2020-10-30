@@ -1,6 +1,12 @@
 import moment from "moment";
-import { RawTaskData, Task, Lane } from "./taskSchedulerUtils";
+import { RawTaskData, Task, DateRange, Lane } from "./taskSchedulerUtils";
 import { DATE_FORMAT } from "../../utils/dateConstants";
+
+export const EMPTY_DATE_RANGE: DateRange = {
+  startDate: undefined,
+  endDate: undefined,
+  totalDays: undefined
+};
 
 /* initializing scheduler with starting tasks */
 
@@ -203,6 +209,13 @@ export const STARTING_TASKS_LANES: Lane[] = [
   { nextFreeSlot: moment("2018-02-16", DATE_FORMAT) }
 ];
 
+// earliest start date to latest end date
+export const STARTING_TASKS_DATE_RANGE = {
+  startDate: moment("2018-01-01", DATE_FORMAT),
+  endDate: moment("2018-02-16", DATE_FORMAT),
+  totalDays: 47
+};
+
 /* adding new tasks */
 
 // task data to pass to .add()
@@ -227,6 +240,13 @@ export const SCHEDULED_TASK_NEW_LANE: Task = {
   endDate: moment("2018-02-17", DATE_FORMAT),
   sortIndex: 10,
   laneIndex: 0
+};
+
+// `ADD_TASK_DATA_NEW_LANE` has an end date beyond the previously-existing range.
+export const ADD_TASK_NEW_LANE_INCREASED_DATE_RANGE = {
+  startDate: moment("2018-01-01", DATE_FORMAT),
+  endDate: moment("2018-02-17", DATE_FORMAT),
+  totalDays: 48
 };
 
 // a more space-efficient way to verify sort and lanes

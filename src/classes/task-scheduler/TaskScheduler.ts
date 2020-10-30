@@ -1,5 +1,12 @@
 import moment from "moment";
-import { Lane, RawTaskData, Task, taskComparator } from "./taskSchedulerUtils";
+import {
+  RawTaskData,
+  Task,
+  DateRange,
+  getDateRangeTotalDayCount,
+  Lane,
+  taskComparator
+} from "./taskSchedulerUtils";
 import SortedList from "../sorted-list/SortedList";
 import { DATE_FORMAT } from "../../utils/dateConstants";
 import { getOneDayAfter } from "../../utils/dateUtils";
@@ -32,12 +39,19 @@ export default class TaskScheduler {
 
   private scheduledTasks: Task[];
 
+  private scheduledDateRange: DateRange;
+
   private scheduledLanes: Lane[];
 
   constructor(startingTasksData?: RawTaskData[]) {
     this.sortedTaskList = new SortedList<Task>(taskComparator);
     this.nextTaskId = STARTING_TASK_ID;
     this.scheduledTasks = [];
+    this.scheduledDateRange = {
+      startDate: undefined,
+      endDate: undefined,
+      totalDays: undefined
+    };
     this.scheduledLanes = [];
 
     if (startingTasksData) {
@@ -118,16 +132,37 @@ export default class TaskScheduler {
   };
 
   /**
-   *
+   * update the scheduled tasks, date range, and lanes.
    */
   private updateSchedule = (): void => {
-    // create new lanes from scratch every time
+    // prevent new lanes from being appended to old lanes
     this.scheduledLanes = [];
 
-    // taskList splices in each added item, so the sortIndices need to be updated
+    // as tasks were spliced into the list, their sortIndices were not updated
     const sortedTasks = updateSortIndices(this.sortedTaskList.items);
+    const scheduledTasks: Task[] = [];
 
-    this.scheduledTasks = sortedTasks.map(this.scheduleTask);
+    // tasksDateRange will be the first start date to the last end date
+    const tasksDateRange: DateRange = {
+      startDate: sortedTasks[0].startDate.clone(),
+      endDate: sortedTasks[0].endDate.clone(),
+      totalDays: undefined
+    };
+
+    sortedTasks.forEach(task => {
+      scheduledTasks.push(this.scheduleTask(task));
+
+      // since tasks are already sorted, only the end date may need updating
+      // we can't assume which task has the last date since they can be arbitrarily long
+      if (task.endDate.isAfter(tasksDateRange.endDate)) {
+        tasksDateRange.endDate = task.endDate.clone();
+      }
+    });
+
+    tasksDateRange.totalDays = getDateRangeTotalDayCount(tasksDateRange);
+
+    this.scheduledTasks = scheduledTasks;
+    this.scheduledDateRange = tasksDateRange;
   };
 
   /**
@@ -162,6 +197,13 @@ export default class TaskScheduler {
    */
   public get tasks(): Task[] {
     return Array.from(this.scheduledTasks);
+  }
+
+  /**
+   * getter for the scheduled date range
+   */
+  public get dateRange(): DateRange {
+    return { ...this.scheduledDateRange };
   }
 
   /**

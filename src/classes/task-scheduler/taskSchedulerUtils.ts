@@ -21,6 +21,32 @@ export interface Lane {
   nextFreeSlot: moment.Moment;
 }
 
+// used to determine the total length of the timeline
+export interface DateRange {
+  startDate: moment.Moment | undefined;
+  endDate: moment.Moment | undefined;
+  totalDays: number | undefined;
+}
+
+/**
+ * returns the total days between start and end date, inclusive
+ * @param dateRange
+ */
+export function getDateRangeTotalDayCount(
+  dateRange: DateRange
+): number | undefined {
+  const { startDate, endDate } = dateRange;
+
+  if (startDate && endDate) {
+    const diff = endDate.diff(startDate, "days");
+
+    // inclusive of first date
+    return diff + 1;
+  }
+
+  return undefined;
+}
+
 /**
  *  sort by ascending start time first, then ascending end time.
  *  ties behave normally.
