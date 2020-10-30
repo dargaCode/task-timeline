@@ -9,7 +9,7 @@ const STARTING_TASK_ID = 1;
 function updateSortIndices(tasks: Task[]): Task[] {
   return tasks.map(
     (task, i): Task => {
-      const updatedTask = Object.assign(task);
+      const updatedTask = { ...task };
 
       updatedTask.sortIndex = i;
 
@@ -110,7 +110,7 @@ export default class TaskScheduler {
       nextAvailableLaneIndex = this.scheduledLanes.length - 1;
     }
 
-    const scheduledTask = Object.assign(task);
+    const scheduledTask = { ...task };
 
     scheduledTask.laneIndex = nextAvailableLaneIndex;
 
