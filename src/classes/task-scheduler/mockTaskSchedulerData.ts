@@ -5,7 +5,7 @@ import { DATE_FORMAT } from "../../utils/dateConstants";
 /* initializing scheduler with starting tasks */
 
 // starting task data to pass to the scheduler constructor
-export const STARTING_TASK_DATA_UNSORTED: RawTaskData[] = [
+export const STARTING_TASKS_DATA_UNSORTED: RawTaskData[] = [
   {
     start: "2018-01-01",
     end: "2018-01-05",
@@ -194,7 +194,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
   }
 ];
 
-export const STARTING_TASK_LANES: Lane[] = [
+export const STARTING_TASKS_LANES: Lane[] = [
   { nextFreeSlot: moment("2018-02-03", DATE_FORMAT) },
   { nextFreeSlot: moment("2018-02-17", DATE_FORMAT) },
   { nextFreeSlot: moment("2018-02-03", DATE_FORMAT) },

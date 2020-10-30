@@ -1,8 +1,8 @@
 import TaskScheduler from "./TaskScheduler";
 import {
-  STARTING_TASK_DATA_UNSORTED,
+  STARTING_TASKS_DATA_UNSORTED,
   STARTING_TASKS_SCHEDULED,
-  STARTING_TASK_LANES,
+  STARTING_TASKS_LANES,
   ADD_TASK_DATA_NO_NEW_LANE,
   ADD_TASK_DATA_NEW_LANE,
   SCHEDULED_TASK_NEW_LANE,
@@ -15,7 +15,7 @@ let scheduler: TaskScheduler;
 
 describe("TaskScheduler", () => {
   beforeEach(() => {
-    scheduler = new TaskScheduler(STARTING_TASK_DATA_UNSORTED);
+    scheduler = new TaskScheduler(STARTING_TASKS_DATA_UNSORTED);
   });
 
   describe("when instantiated", () => {
@@ -100,7 +100,7 @@ describe("TaskScheduler", () => {
       it("should not create a new lane", () => {
         scheduler.add(ADD_TASK_DATA_NO_NEW_LANE);
 
-        expect(scheduler.lanes).toHaveLength(STARTING_TASK_LANES.length);
+        expect(scheduler.lanes).toHaveLength(STARTING_TASKS_LANES.length);
       });
     });
 
@@ -108,7 +108,7 @@ describe("TaskScheduler", () => {
       it("should create a new lane", () => {
         scheduler.add(ADD_TASK_DATA_NEW_LANE);
 
-        expect(scheduler.lanes).toHaveLength(STARTING_TASK_LANES.length + 1);
+        expect(scheduler.lanes).toHaveLength(STARTING_TASKS_LANES.length + 1);
       });
     });
 
