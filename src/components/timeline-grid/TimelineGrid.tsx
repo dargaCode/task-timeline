@@ -1,6 +1,7 @@
 import React from "react";
 import moment from "moment";
 import { Task } from "../../classes/task-scheduler/taskSchedulerUtils";
+import TaskCard from "../task-card/TaskCard";
 import {
   DATE_FORMAT,
   DATE_FORMAT_TIMELINE_DATE
@@ -46,22 +47,9 @@ export default class TimelineGrid extends React.Component<Props, State> {
           {/* todo extract to Task component */}
           {/* todo convert task start/end dates to grid columns */}
           {tasks.map(task => {
-            const { name, laneIndex, id, startDate, endDate } = task;
-            const rowNum = laneIndex + 1;
+            const { id } = task;
 
-            // todo delete me
-            const startDateText = startDate.format("M/D");
-            const endDateText = endDate.format("M/D");
-
-            return (
-              <div
-                key={id}
-                className={styles.task}
-                style={{ gridRow: `${rowNum}` }}
-              >
-                ({startDateText}-{endDateText}) {id}: {name}
-              </div>
-            );
+            return <TaskCard key={id} task={task} />;
           })}
         </div>
       </div>
