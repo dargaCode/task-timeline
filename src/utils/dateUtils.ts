@@ -5,11 +5,11 @@ export function getOneDayAfter(date: moment.Moment): moment.Moment {
 }
 
 /**
- * return moment dates for the start date and n sequential
+ * return moments for the start date and n-1 sequential
  * days after that. Sequence is every day, no gaps.
  *
  * @param startDate day to start counting from
- * @param dayCount how many days to add beyond start
+ * @param dayCount how many days to return total
  */
 export function getNSequentialDaysFromStart(
   startDate: moment.Moment,
