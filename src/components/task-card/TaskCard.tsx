@@ -6,6 +6,9 @@ interface Props {
   task: Task;
 }
 
+/**
+ * task card is the visual representation of a task itself
+ */
 export default function TaskCard(props: Props): JSX.Element {
   const { task } = props;
   const {

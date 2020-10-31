@@ -36,8 +36,8 @@ export interface DateRange {
 /**
  *  sort by ascending start time first, then ascending end time.
  *  ties behave normally.
- * @param a first task
- * @param b second task
+ * @param a the first task
+ * @param b the second task
  */
 export const taskComparator: Comparator<Task> = (a, b) => {
   if (a.startDate.isBefore(b.startDate)) {

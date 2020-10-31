@@ -13,6 +13,10 @@ interface State {
   dateRange: DateRange;
 }
 
+/**
+ * timeline container owns what would be the api call to fetch preexisting
+ * tasks. in this case it's loading them from a data file.
+ */
 export default class TimelineContainer extends React.Component<{}, State> {
   private scheduler: TaskScheduler | undefined;
 

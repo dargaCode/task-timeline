@@ -11,6 +11,10 @@ interface Props {
   columnCount: number;
 }
 
+/**
+ * timeline grid renders the date headers, the schedule grid, and
+ * the tasks themselves.
+ */
 export default function TimelineGrid(props: Props): JSX.Element {
   const { tasks, columnDates, columnCount } = props;
 
