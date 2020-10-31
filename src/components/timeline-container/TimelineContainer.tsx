@@ -1,10 +1,11 @@
 import React from "react";
+import { STARTING_TASKS } from "../timeline-data";
 import TaskScheduler from "../../classes/task-scheduler/TaskScheduler";
 import {
   Task,
   DateRange
 } from "../../classes/task-scheduler/taskSchedulerUtils";
-import { STARTING_TASKS } from "../timeline-data";
+import { getNSequentialDays } from "../../utils/dateUtils";
 import TimelineGrid from "../timeline-grid/TimelineGrid";
 
 interface State {
@@ -46,15 +47,23 @@ export default class TimelineContainer extends React.Component<{}, State> {
 
     this.setState({
       tasks: this.scheduler.tasks,
-      laneCount: this.scheduler.lanes.length
+      laneCount: this.scheduler.lanes.length,
+      dateRange: this.scheduler.dateRange
     });
   }
 
   render(): JSX.Element {
     const { tasks, laneCount, dateRange } = this.state;
+    const { startDate, totalDays } = dateRange;
+    const columnDates = getNSequentialDays(startDate, totalDays);
 
     return (
-      <TimelineGrid tasks={tasks} laneCount={laneCount} dateRange={dateRange} />
+      <TimelineGrid
+        tasks={tasks}
+        laneCount={laneCount}
+        columnDates={columnDates}
+        columnCount={totalDays || 0}
+      />
     );
   }
 }
