@@ -1,6 +1,7 @@
 import moment from "moment";
 import { Comparator } from "../sorted-list/sortedListUtils";
 
+// the data needed to create a task is very minimal
 export interface RawTaskData {
   name: string;
   start: string;
@@ -19,6 +20,8 @@ export interface Task {
   laneIndex: number;
 }
 
+// lanes' next free slot are used to determine if a task can fit in existing lanes
+// or if another will be added
 export interface Lane {
   nextFreeSlot: moment.Moment;
 }

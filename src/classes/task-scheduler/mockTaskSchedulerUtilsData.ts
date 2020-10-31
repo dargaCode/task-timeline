@@ -2,6 +2,8 @@ import moment from "moment";
 import { Task } from "./taskSchedulerUtils";
 import { DATE_FORMAT } from "../../utils/dateConstants";
 
+/* comparator */
+
 // tasks to sort to make sure start date sorts properly
 export const UNSORTED_TASKS_START_TIME: Task[] = [
   {
