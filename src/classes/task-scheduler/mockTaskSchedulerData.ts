@@ -238,7 +238,7 @@ export const STARTING_TASKS_LANES: Lane[] = [
 ];
 
 // earliest start date to latest end date
-export const STARTING_TASKS_DATE_RANGE = {
+export const STARTING_TASKS_DATE_RANGE: DateRange = {
   startDate: moment("2018-01-01", DATE_FORMAT),
   endDate: moment("2018-02-16", DATE_FORMAT),
   totalDays: 47
@@ -273,7 +273,7 @@ export const SCHEDULED_TASK_NEW_LANE: Task = {
 };
 
 // `ADD_TASK_DATA_NEW_LANE` has an end date beyond the previously-existing range.
-export const ADD_TASK_NEW_LANE_INCREASED_DATE_RANGE = {
+export const ADD_TASK_NEW_LANE_INCREASED_DATE_RANGE: DateRange = {
   startDate: moment("2018-01-01", DATE_FORMAT),
   endDate: moment("2018-02-17", DATE_FORMAT),
   totalDays: 48
