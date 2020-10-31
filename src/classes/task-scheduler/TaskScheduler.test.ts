@@ -129,6 +129,19 @@ describe("TaskScheduler", () => {
       });
     });
 
+    it("should assign the correct date indices to each task", () => {
+      scheduler.tasks.forEach(task => {
+        const { id } = task;
+
+        expect(task.startDateIndex).toBe(
+          SCHEDULE_SUMMARY_NEW_LANE[id].startDateIndex
+        );
+        expect(task.endDateIndex).toBe(
+          SCHEDULE_SUMMARY_NEW_LANE[id].endDateIndex
+        );
+      });
+    });
+
     describe("when it can fit into one of the existing lanes", () => {
       it("should not create a new lane", () => {
         scheduler.add(ADD_TASK_DATA_NO_NEW_LANE);
