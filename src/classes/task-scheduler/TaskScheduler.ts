@@ -44,7 +44,8 @@ function updateDateIndices(
     const { startDate, endDate } = updatedTask;
 
     updatedTask.startDateIndex = startDate.diff(earliestStartDate, "days");
-    updatedTask.endDateIndex = endDate.diff(earliestStartDate, "days");
+    // tasks end at the end of their last day, not the beginning
+    updatedTask.endDateIndex = 1 + endDate.diff(earliestStartDate, "days");
 
     return updatedTask;
   });

@@ -17,7 +17,9 @@ export default function TaskCard(props: Props): JSX.Element {
     startDateIndex,
     endDateIndex
   } = task;
-  const rowNum = laneIndex + 1;
+  const taskRow = laneIndex + 1;
+  const startColumn = startDateIndex + 1;
+  const endColumn = endDateIndex + 1;
 
   // todo delete me
   const startDateText = startDate.format("M/D");
@@ -28,9 +30,9 @@ export default function TaskCard(props: Props): JSX.Element {
       key={id}
       className={styles.task}
       style={{
-        gridRow: `${rowNum}`,
-        gridColumnStart: `${startDateIndex + 1}`,
-        gridColumnEnd: `${endDateIndex + 2}`
+        gridRow: `${taskRow}`,
+        gridColumnStart: `${startColumn}`,
+        gridColumnEnd: `${endColumn}`
       }}
     >
       ({startDateText}-{endDateText}) {id}: {name}
