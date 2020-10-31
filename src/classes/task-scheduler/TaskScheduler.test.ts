@@ -47,6 +47,17 @@ describe("TaskScheduler", () => {
         });
       });
 
+      it("should assign the correct date indices to each task", () => {
+        scheduler.tasks.forEach((task, i) => {
+          expect(task.startDateIndex).toBe(
+            STARTING_TASKS_SCHEDULED[i].startDateIndex
+          );
+          expect(task.endDateIndex).toBe(
+            STARTING_TASKS_SCHEDULED[i].endDateIndex
+          );
+        });
+      });
+
       it("should schedule all the tasks in the correct lanes", () => {
         expect(scheduler.tasks).toEqual(STARTING_TASKS_SCHEDULED);
       });
@@ -73,7 +84,7 @@ describe("TaskScheduler", () => {
   });
 
   describe(".add()", () => {
-    it("should add a new task", () => {
+    it("should create and schedule a new task", () => {
       const oldTaskCount = scheduler.tasks.length;
 
       scheduler.add(ADD_TASK_DATA_NEW_LANE);
@@ -81,7 +92,18 @@ describe("TaskScheduler", () => {
       expect(scheduler.tasks).toHaveLength(oldTaskCount + 1);
     });
 
-    it("should create a new task with a unique id", () => {
+    it("should assign the correct date indices to the task", () => {
+      const scheduledTask = scheduler.add(ADD_TASK_DATA_NEW_LANE);
+
+      expect(scheduledTask.startDateIndex).toBe(
+        SCHEDULED_TASK_NEW_LANE.startDateIndex
+      );
+      expect(scheduledTask.endDateIndex).toBe(
+        SCHEDULED_TASK_NEW_LANE.endDateIndex
+      );
+    });
+
+    it("should assign a unique id to the task", () => {
       const scheduledTask = scheduler.add(ADD_TASK_DATA_NEW_LANE);
 
       expect(scheduledTask).toEqual(SCHEDULED_TASK_NEW_LANE);

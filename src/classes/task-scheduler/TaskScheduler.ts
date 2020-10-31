@@ -31,6 +31,26 @@ function updateSortIndices(tasks: Task[]): Task[] {
 }
 
 /**
+ *
+ * @param tasks
+ * @param earliestStartDate
+ */
+function updateDateIndices(
+  tasks: Task[],
+  earliestStartDate: moment.Moment
+): Task[] {
+  return tasks.map(task => {
+    const updatedTask = { ...task };
+    const { startDate, endDate } = updatedTask;
+
+    updatedTask.startDateIndex = startDate.diff(earliestStartDate, "days");
+    updatedTask.endDateIndex = endDate.diff(earliestStartDate, "days");
+
+    return updatedTask;
+  });
+}
+
+/**
  * task scheduler converts raw task data into tasks, and schedules
  * those tasks in as few lanes as possible.
  *
@@ -88,6 +108,8 @@ export default class TaskScheduler {
       name,
       startDate: moment(start, DATE_FORMAT),
       endDate: moment(end, DATE_FORMAT),
+      startDateIndex: 0,
+      endDateIndex: 0,
       sortIndex: 0,
       laneIndex: 0
     };
@@ -145,29 +167,36 @@ export default class TaskScheduler {
 
     // as tasks were spliced into the list, their sortIndices were not updated
     const sortedTasks = updateSortIndices(this.sortedTaskList.items);
+
+    // the first task will always have the earliest startDate.
+    // we need this index immediately to assign tasks' date indexes.
+    // this will ultimately be what defines the grid column range for each task.
+    const earliestStartDate = sortedTasks[0].startDate.clone();
+    // since tasks are already sorted, only the end date may need updating
+    // we can't assume which task has the last date since each can be arbitrarily long
+    let latestEndDate = sortedTasks[0].startDate.clone();
+
+    const indexedTasks: Task[] = updateDateIndices(
+      sortedTasks,
+      earliestStartDate
+    );
+
     const scheduledTasks: Task[] = [];
 
-    // tasksDateRange will be the first start date to the last end date
-    const tasksDateRange: DateRange = {
-      startDate: sortedTasks[0].startDate.clone(),
-      endDate: sortedTasks[0].endDate.clone(),
-      totalDays: undefined
-    };
-
-    sortedTasks.forEach(task => {
+    indexedTasks.forEach(task => {
       scheduledTasks.push(this.scheduleTask(task));
 
-      // since tasks are already sorted, only the end date may need updating
-      // we can't assume which task has the last date since they can be arbitrarily long
-      if (task.endDate.isAfter(tasksDateRange.endDate)) {
-        tasksDateRange.endDate = task.endDate.clone();
+      if (task.endDate.isAfter(latestEndDate)) {
+        latestEndDate = task.endDate.clone();
       }
     });
 
-    tasksDateRange.totalDays = getDateRangeTotalDayCount(tasksDateRange);
-
     this.scheduledTasks = scheduledTasks;
-    this.scheduledDateRange = tasksDateRange;
+    this.scheduledDateRange = {
+      startDate: earliestStartDate,
+      endDate: latestEndDate,
+      totalDays: getDateRangeTotalDayCount(earliestStartDate, latestEndDate)
+    };
   };
 
   /**

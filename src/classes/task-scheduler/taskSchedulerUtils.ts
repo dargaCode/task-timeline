@@ -32,13 +32,13 @@ export interface DateRange {
 
 /**
  * returns the total days between start and end date, inclusive
- * @param dateRange
+ * @param startDate
+ * @param endDate
  */
 export function getDateRangeTotalDayCount(
-  dateRange: DateRange
+  startDate: moment.Moment,
+  endDate: moment.Moment
 ): number | undefined {
-  const { startDate, endDate } = dateRange;
-
   if (startDate && endDate) {
     const diff = endDate.diff(startDate, "days");
 
