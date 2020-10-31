@@ -31,25 +31,6 @@ export interface DateRange {
 }
 
 /**
- * returns the total days between start and end date, inclusive
- * @param startDate
- * @param endDate
- */
-export function getDateRangeTotalDayCount(
-  startDate: moment.Moment,
-  endDate: moment.Moment
-): number | undefined {
-  if (startDate && endDate) {
-    const diff = endDate.diff(startDate, "days");
-
-    // inclusive of first date
-    return diff + 1;
-  }
-
-  return undefined;
-}
-
-/**
  *  sort by ascending start time first, then ascending end time.
  *  ties behave normally.
  * @param a first task

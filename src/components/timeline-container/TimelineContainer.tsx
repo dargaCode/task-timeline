@@ -5,7 +5,7 @@ import {
   Task,
   DateRange
 } from "../../classes/task-scheduler/taskSchedulerUtils";
-import { getNSequentialDays } from "../../utils/dateUtils";
+import { getNSequentialDaysFromStart } from "../../utils/dateUtils";
 import TimelineGrid from "../timeline-grid/TimelineGrid";
 
 interface State {
@@ -52,7 +52,7 @@ export default class TimelineContainer extends React.Component<{}, State> {
   render(): JSX.Element {
     const { tasks, dateRange } = this.state;
     const { startDate, totalDays } = dateRange;
-    const columnDates = getNSequentialDays(startDate, totalDays);
+    const columnDates = getNSequentialDaysFromStart(startDate, totalDays);
 
     return (
       <TimelineGrid

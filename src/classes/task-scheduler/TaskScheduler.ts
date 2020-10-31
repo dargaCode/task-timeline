@@ -3,13 +3,15 @@ import {
   RawTaskData,
   Task,
   DateRange,
-  getDateRangeTotalDayCount,
   Lane,
   taskComparator
 } from "./taskSchedulerUtils";
 import SortedList from "../sorted-list/SortedList";
 import { DATE_FORMAT } from "../../utils/dateConstants";
-import { getOneDayAfter } from "../../utils/dateUtils";
+import {
+  getOneDayAfter,
+  getDateRangeInclusiveDayCount
+} from "../../utils/dateUtils";
 
 const STARTING_TASK_ID = 1;
 
@@ -196,7 +198,7 @@ export default class TaskScheduler {
     this.scheduledDateRange = {
       startDate: earliestStartDate,
       endDate: latestEndDate,
-      totalDays: getDateRangeTotalDayCount(earliestStartDate, latestEndDate)
+      totalDays: getDateRangeInclusiveDayCount(earliestStartDate, latestEndDate)
     };
   };
 
