@@ -12,13 +12,9 @@ export function getOneDayAfter(date: moment.Moment): moment.Moment {
  * @param dayCount how many days to add beyond start
  */
 export function getNSequentialDaysFromStart(
-  startDate?: moment.Moment,
-  dayCount?: number
+  startDate: moment.Moment,
+  dayCount: number
 ): moment.Moment[] {
-  if (!startDate || !dayCount) {
-    return [];
-  }
-
   const dates: moment.Moment[] = [];
   const currentDate = startDate.clone();
 
@@ -42,10 +38,6 @@ export function getDateRangeInclusiveDayCount(
   startDate: moment.Moment,
   endDate: moment.Moment
 ): number | undefined {
-  if (startDate && endDate) {
-    // inclusive of both start and end dates
-    return 1 + endDate.diff(startDate, "days");
-  }
-
-  return undefined;
+  // inclusive of both start and end dates
+  return 1 + endDate.diff(startDate, "days");
 }

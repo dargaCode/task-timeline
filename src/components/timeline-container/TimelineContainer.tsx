@@ -52,12 +52,17 @@ export default class TimelineContainer extends React.Component<{}, State> {
   render(): JSX.Element {
     const { tasks, dateRange } = this.state;
     const { startDate, totalDays } = dateRange;
-    const columnDates = getNSequentialDaysFromStart(startDate, totalDays);
+
+    let columnDates;
+
+    if (startDate && totalDays) {
+      columnDates = getNSequentialDaysFromStart(startDate, totalDays);
+    }
 
     return (
       <TimelineGrid
         tasks={tasks}
-        columnDates={columnDates}
+        columnDates={columnDates || []}
         columnCount={totalDays || 0}
       />
     );
