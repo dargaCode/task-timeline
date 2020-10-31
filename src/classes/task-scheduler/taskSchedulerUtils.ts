@@ -12,7 +12,9 @@ export interface Task {
   id: number;
   name: string;
   startDate: moment.Moment;
+  startDateIndex: number;
   endDate: moment.Moment;
+  endDateIndex: number;
   sortIndex: number;
   laneIndex: number;
 }
