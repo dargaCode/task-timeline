@@ -10,7 +10,6 @@ import TimelineGrid from "../timeline-grid/TimelineGrid";
 
 interface State {
   tasks: Task[];
-  laneCount: number;
   dateRange: DateRange;
 }
 
@@ -24,7 +23,6 @@ export default class TimelineContainer extends React.Component<{}, State> {
 
     this.state = {
       tasks: [],
-      laneCount: 0,
       dateRange: {
         startDate: undefined,
         endDate: undefined,
@@ -47,20 +45,18 @@ export default class TimelineContainer extends React.Component<{}, State> {
 
     this.setState({
       tasks: this.scheduler.tasks,
-      laneCount: this.scheduler.lanes.length,
       dateRange: this.scheduler.dateRange
     });
   }
 
   render(): JSX.Element {
-    const { tasks, laneCount, dateRange } = this.state;
+    const { tasks, dateRange } = this.state;
     const { startDate, totalDays } = dateRange;
     const columnDates = getNSequentialDays(startDate, totalDays);
 
     return (
       <TimelineGrid
         tasks={tasks}
-        laneCount={laneCount}
         columnDates={columnDates}
         columnCount={totalDays || 0}
       />

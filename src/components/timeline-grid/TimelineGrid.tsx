@@ -7,7 +7,6 @@ import styles from "./TimelineGrid.module.scss";
 
 interface Props {
   tasks: Task[];
-  laneCount: number;
   columnDates: moment.Moment[];
   columnCount: number;
 }
