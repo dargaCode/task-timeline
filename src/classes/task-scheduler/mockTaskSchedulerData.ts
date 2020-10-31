@@ -91,7 +91,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     startDate: moment("2018-01-01", DATE_FORMAT),
     startDateIndex: 0,
     endDate: moment("2018-01-05", DATE_FORMAT),
-    endDateIndex: 4,
+    endDateIndex: 5,
     name: "First item",
     sortIndex: 0,
     laneIndex: 0
@@ -101,7 +101,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     startDate: moment("2018-01-02", DATE_FORMAT),
     startDateIndex: 1,
     endDate: moment("2018-01-08", DATE_FORMAT),
-    endDateIndex: 7,
+    endDateIndex: 8,
     name: "Second item",
     sortIndex: 1,
     laneIndex: 1
@@ -111,7 +111,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     startDate: moment("2018-01-03", DATE_FORMAT),
     startDateIndex: 2,
     endDate: moment("2018-01-05", DATE_FORMAT),
-    endDateIndex: 4,
+    endDateIndex: 5,
     name: "First item",
     sortIndex: 2,
     laneIndex: 2
@@ -121,7 +121,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     startDate: moment("2018-01-04", DATE_FORMAT),
     startDateIndex: 3,
     endDate: moment("2018-01-08", DATE_FORMAT),
-    endDateIndex: 7,
+    endDateIndex: 8,
     name: "Second item",
     sortIndex: 3,
     laneIndex: 3
@@ -131,7 +131,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     startDate: moment("2018-01-06", DATE_FORMAT),
     startDateIndex: 5,
     endDate: moment("2018-01-13", DATE_FORMAT),
-    endDateIndex: 12,
+    endDateIndex: 13,
     name: "Another item",
     sortIndex: 4,
     laneIndex: 0
@@ -141,7 +141,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     startDate: moment("2018-01-06", DATE_FORMAT),
     startDateIndex: 5,
     endDate: moment("2018-01-13", DATE_FORMAT),
-    endDateIndex: 12,
+    endDateIndex: 13,
     name: "Another item",
     sortIndex: 5,
     laneIndex: 2
@@ -151,7 +151,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     startDate: moment("2018-01-09", DATE_FORMAT),
     startDateIndex: 8,
     endDate: moment("2018-01-09", DATE_FORMAT),
-    endDateIndex: 8,
+    endDateIndex: 9,
     name: "Another item",
     sortIndex: 6,
     laneIndex: 1
@@ -161,7 +161,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     startDate: moment("2018-01-12", DATE_FORMAT),
     startDateIndex: 11,
     endDate: moment("2018-02-16", DATE_FORMAT),
-    endDateIndex: 46,
+    endDateIndex: 47,
     name: "Fourth item with a super long name",
     sortIndex: 7,
     laneIndex: 1
@@ -171,7 +171,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     startDate: moment("2018-01-12", DATE_FORMAT),
     startDateIndex: 11,
     endDate: moment("2018-02-16", DATE_FORMAT),
-    endDateIndex: 46,
+    endDateIndex: 47,
     name: "Fourth item with a super long name",
     sortIndex: 8,
     laneIndex: 3
@@ -181,7 +181,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     startDate: moment("2018-01-14", DATE_FORMAT),
     startDateIndex: 13,
     endDate: moment("2018-01-14", DATE_FORMAT),
-    endDateIndex: 13,
+    endDateIndex: 14,
     name: "Another item",
     sortIndex: 9,
     laneIndex: 0
@@ -191,7 +191,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     startDate: moment("2018-02-01", DATE_FORMAT),
     startDateIndex: 31,
     endDate: moment("2018-02-02", DATE_FORMAT),
-    endDateIndex: 32,
+    endDateIndex: 33,
     name: "Fifth item with a super long name",
     sortIndex: 10,
     laneIndex: 0
@@ -201,7 +201,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     startDate: moment("2018-02-01", DATE_FORMAT),
     startDateIndex: 31,
     endDate: moment("2018-02-02", DATE_FORMAT),
-    endDateIndex: 32,
+    endDateIndex: 33,
     name: "Fifth item with a super long name",
     sortIndex: 11,
     laneIndex: 2
@@ -211,7 +211,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     startDate: moment("2018-02-01", DATE_FORMAT),
     startDateIndex: 31,
     endDate: moment("2018-02-15", DATE_FORMAT),
-    endDateIndex: 45,
+    endDateIndex: 46,
     name: "Third item",
     sortIndex: 12,
     laneIndex: 4
@@ -221,7 +221,7 @@ export const STARTING_TASKS_SCHEDULED: Task[] = [
     startDate: moment("2018-02-01", DATE_FORMAT),
     startDateIndex: 31,
     endDate: moment("2018-02-15", DATE_FORMAT),
-    endDateIndex: 45,
+    endDateIndex: 46,
     name: "Third item",
     sortIndex: 13,
     laneIndex: 5
@@ -267,7 +267,7 @@ export const SCHEDULED_TASK_NEW_LANE: Task = {
   startDate: moment("2018-01-21", DATE_FORMAT),
   startDateIndex: 20,
   endDate: moment("2018-02-17", DATE_FORMAT),
-  endDateIndex: 47,
+  endDateIndex: 48,
   sortIndex: 10,
   laneIndex: 0
 };
@@ -294,91 +294,91 @@ export interface ScheduleSummary {
 export const SCHEDULE_SUMMARY_NEW_LANE: ScheduleSummary = {
   1: {
     startDateIndex: 0,
-    endDateIndex: 4,
+    endDateIndex: 5,
     sortIndex: 0,
     laneIndex: 0
   },
   2: {
     startDateIndex: 1,
-    endDateIndex: 7,
+    endDateIndex: 8,
     sortIndex: 1,
     laneIndex: 1
   },
   3: {
     startDateIndex: 5,
-    endDateIndex: 12,
+    endDateIndex: 13,
     sortIndex: 5,
     laneIndex: 2
   },
   4: {
     startDateIndex: 13,
-    endDateIndex: 13,
+    endDateIndex: 14,
     sortIndex: 9,
     laneIndex: 0
   },
   5: {
     startDateIndex: 31,
-    endDateIndex: 45,
+    endDateIndex: 46,
     sortIndex: 14,
     laneIndex: 6
   },
   6: {
     startDateIndex: 11,
-    endDateIndex: 46,
+    endDateIndex: 47,
     sortIndex: 8,
     laneIndex: 3
   },
   7: {
     startDateIndex: 31,
-    endDateIndex: 32,
+    endDateIndex: 33,
     sortIndex: 12,
     laneIndex: 4
   },
   8: {
     startDateIndex: 2,
-    endDateIndex: 4,
+    endDateIndex: 5,
     sortIndex: 2,
     laneIndex: 2
   },
   9: {
     startDateIndex: 3,
-    endDateIndex: 7,
+    endDateIndex: 8,
     sortIndex: 3,
     laneIndex: 3
   },
   10: {
     startDateIndex: 5,
-    endDateIndex: 12,
+    endDateIndex: 13,
     sortIndex: 4,
     laneIndex: 0
   },
   11: {
     startDateIndex: 8,
-    endDateIndex: 8,
+    endDateIndex: 9,
     sortIndex: 6,
     laneIndex: 1
   },
   12: {
     startDateIndex: 31,
-    endDateIndex: 45,
+    endDateIndex: 46,
     sortIndex: 13,
     laneIndex: 5
   },
   13: {
     startDateIndex: 11,
-    endDateIndex: 46,
+    endDateIndex: 47,
     sortIndex: 7,
     laneIndex: 1
   },
   14: {
     startDateIndex: 31,
-    endDateIndex: 32,
+    endDateIndex: 33,
     sortIndex: 11,
     laneIndex: 2
   },
   15: {
     startDateIndex: 20,
-    endDateIndex: 47,
+    endDateIndex: 48,
     sortIndex: 10,
     laneIndex: 0
   }
