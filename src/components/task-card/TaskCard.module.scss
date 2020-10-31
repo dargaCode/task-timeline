@@ -1,0 +1,10 @@
+@use "../../config";
+
+.task {
+  background: #999;
+  border: 1px solid black;
+  color: #eee;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

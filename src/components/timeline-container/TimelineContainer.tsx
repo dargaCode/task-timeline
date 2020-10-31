@@ -1,14 +1,22 @@
 import React from "react";
-import TaskScheduler from "../../classes/task-scheduler/TaskScheduler";
-import { Task } from "../../classes/task-scheduler/taskSchedulerUtils";
 import { STARTING_TASKS } from "../timeline-data";
+import TaskScheduler from "../../classes/task-scheduler/TaskScheduler";
+import {
+  Task,
+  DateRange
+} from "../../classes/task-scheduler/taskSchedulerUtils";
+import { getNSequentialDaysFromStart } from "../../utils/dateUtils";
 import TimelineGrid from "../timeline-grid/TimelineGrid";
 
 interface State {
   tasks: Task[];
-  laneCount: number;
+  dateRange: DateRange;
 }
 
+/**
+ * timeline container owns what would be the api call to fetch preexisting
+ * tasks. in this case it's loading them from a data file.
+ */
 export default class TimelineContainer extends React.Component<{}, State> {
   private scheduler: TaskScheduler | undefined;
 
@@ -19,7 +27,11 @@ export default class TimelineContainer extends React.Component<{}, State> {
 
     this.state = {
       tasks: [],
-      laneCount: 0
+      dateRange: {
+        startDate: undefined,
+        endDate: undefined,
+        totalDays: undefined
+      }
     };
   }
 
@@ -27,22 +39,36 @@ export default class TimelineContainer extends React.Component<{}, State> {
     this.fetchTasks();
   }
 
+  /**
+   * in a real task with a backend this would be an api call
+   */
   fetchTasks(): void {
-    // in a real app with a backend this would be an api call
     const rawTasks = Array.from(STARTING_TASKS);
 
     this.scheduler = new TaskScheduler(rawTasks);
-    // this.scheduler = new TaskScheduler();
 
     this.setState({
       tasks: this.scheduler.tasks,
-      laneCount: this.scheduler.lanes.length
+      dateRange: this.scheduler.dateRange
     });
   }
 
   render(): JSX.Element {
-    const { tasks, laneCount } = this.state;
+    const { tasks, dateRange } = this.state;
+    const { startDate, totalDays } = dateRange;
 
-    return <TimelineGrid tasks={tasks} laneCount={laneCount} />;
+    let columnDates;
+
+    if (startDate && totalDays) {
+      columnDates = getNSequentialDaysFromStart(startDate, totalDays);
+    }
+
+    return (
+      <TimelineGrid
+        tasks={tasks}
+        columnDates={columnDates || []}
+        columnCount={totalDays || 0}
+      />
+    );
   }
 }

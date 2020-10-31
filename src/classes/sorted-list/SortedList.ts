@@ -2,9 +2,8 @@ import { Comparator } from "./sortedListUtils";
 
 /**
  * sorted list keeps items sorted as they are added.
- * it can handle items and comparators of any type.
+ * it can handle items/comparators of any (matching) type.
  */
-
 export default class SortedList<T> {
   private readonly itemList: T[];
 

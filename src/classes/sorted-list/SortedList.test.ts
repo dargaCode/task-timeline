@@ -78,7 +78,7 @@ describe("SortedList", () => {
   });
 
   describe(".remove()", () => {
-    it("it should shorten the list by one item", () => {
+    it("should shorten the list by one item", () => {
       UNSORTED_NUMS.forEach(num => {
         sortedNumList.add(num);
       });
@@ -90,7 +90,7 @@ describe("SortedList", () => {
       expect(sortedNumList.items).toEqual([]);
     });
 
-    it("it should remove the item at the specified index", () => {
+    it("should remove the item at the specified index", () => {
       UNSORTED_NUMS.forEach(num => {
         sortedNumList.add(num);
       });
@@ -120,10 +120,7 @@ describe("SortedList", () => {
   });
 
   describe.skip(".modify()", () => {
-    it("", () => {
-      // TODO this function will modify the item and then immediately re-sort it
-    });
-
+    // TODO this function will modify the item and then immediately re-sort it
     // TODO in the future can return the item and use it to build an undo stack
   });
 });

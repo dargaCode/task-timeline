@@ -4,7 +4,14 @@ export function getOneDayAfter(date: moment.Moment): moment.Moment {
   return date.clone().add(1, "day");
 }
 
-export function getNSequentialDays(
+/**
+ * return moments for the start date and n-1 sequential
+ * days after that. Sequence is every day, no gaps.
+ *
+ * @param startDate day to start counting from
+ * @param dayCount how many days to return total
+ */
+export function getNSequentialDaysFromStart(
   startDate: moment.Moment,
   dayCount: number
 ): moment.Moment[] {
@@ -19,4 +26,18 @@ export function getNSequentialDays(
   }
 
   return dates;
+}
+
+/**
+ * returns the total days between start and end date, inclusive
+ * of both the start date and end date
+ * @param startDate from the beginning of this day
+ * @param endDate to the end of this day
+ */
+export function getDateRangeInclusiveDayCount(
+  startDate: moment.Moment,
+  endDate: moment.Moment
+): number | undefined {
+  // inclusive of both start and end dates
+  return 1 + endDate.diff(startDate, "days");
 }

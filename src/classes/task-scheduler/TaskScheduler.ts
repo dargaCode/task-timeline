@@ -1,21 +1,57 @@
 import moment from "moment";
-import { Lane, RawTaskData, Task, taskComparator } from "./taskSchedulerUtils";
+import {
+  RawTaskData,
+  Task,
+  DateRange,
+  Lane,
+  taskComparator
+} from "./taskSchedulerUtils";
 import SortedList from "../sorted-list/SortedList";
 import { DATE_FORMAT } from "../../utils/dateConstants";
-import { getOneDayAfter } from "../../utils/dateUtils";
+import {
+  getOneDayAfter,
+  getDateRangeInclusiveDayCount
+} from "../../utils/dateUtils";
 
 const STARTING_TASK_ID = 1;
 
+/**
+ * as tasks are spliced in and out of their array, they
+ * can become out of sync with their sort indices.
+ * @param tasks
+ */
 function updateSortIndices(tasks: Task[]): Task[] {
   return tasks.map(
     (task, i): Task => {
-      const updatedTask = Object.assign(task);
+      const updatedTask = { ...task };
 
       updatedTask.sortIndex = i;
 
       return updatedTask;
     }
   );
+}
+
+/**
+ * populate the date indices for a task, compared to the
+ * earliest start date of any existing task.
+ * @param tasks
+ * @param earliestStartDate the beginning of the timeline
+ */
+function updateDateIndices(
+  tasks: Task[],
+  earliestStartDate: moment.Moment
+): Task[] {
+  return tasks.map(task => {
+    const updatedTask = { ...task };
+    const { startDate, endDate } = updatedTask;
+
+    updatedTask.startDateIndex = startDate.diff(earliestStartDate, "days");
+    // tasks end at the end of their last day, not the beginning
+    updatedTask.endDateIndex = 1 + endDate.diff(earliestStartDate, "days");
+
+    return updatedTask;
+  });
 }
 
 /**
@@ -32,12 +68,19 @@ export default class TaskScheduler {
 
   private scheduledTasks: Task[];
 
+  private scheduledDateRange: DateRange;
+
   private scheduledLanes: Lane[];
 
   constructor(startingTasksData?: RawTaskData[]) {
     this.sortedTaskList = new SortedList<Task>(taskComparator);
     this.nextTaskId = STARTING_TASK_ID;
     this.scheduledTasks = [];
+    this.scheduledDateRange = {
+      startDate: undefined,
+      endDate: undefined,
+      totalDays: undefined
+    };
     this.scheduledLanes = [];
 
     if (startingTasksData) {
@@ -46,7 +89,8 @@ export default class TaskScheduler {
   }
 
   /**
-   *
+   * every time a task is created, use the next sequential
+   * integer as its id.
    */
   private getNextTaskId = (): number => {
     const { nextTaskId } = this;
@@ -57,8 +101,10 @@ export default class TaskScheduler {
   };
 
   /**
-   *
-   * @param rawTask
+   * process the raw data for a task into a task which has all the
+   * fields which will be needed to schedule and eventually render it.
+   * (in a real app with a backend this would likely be an API call.)
+   * @param rawTask the name, start date and end date
    */
   private generateTask = (rawTask: RawTaskData): Task => {
     const { name, start, end } = rawTask;
@@ -69,16 +115,20 @@ export default class TaskScheduler {
       name,
       startDate: moment(start, DATE_FORMAT),
       endDate: moment(end, DATE_FORMAT),
+      // all the below fields will be updated as part of scheduling
+      startDateIndex: 0,
+      endDateIndex: 0,
       sortIndex: 0,
       laneIndex: 0
     };
   };
 
   /**
-   *
-   * @param startDate
+   * find the first lane which has a free slot where at the `targetDate` or later.
+   * if no lanes have available slots, return -1 (so one can be created).
+   * @param targetDate
    */
-  private getNextAvailableLaneIndex = (startDate: moment.Moment): number => {
+  private getNextAvailableLaneIndex = (targetDate: moment.Moment): number => {
     if (!this.scheduledLanes) {
       return -1;
     }
@@ -86,12 +136,14 @@ export default class TaskScheduler {
     return this.scheduledLanes.findIndex(lane => {
       const { nextFreeSlot } = lane;
 
-      return startDate.isSameOrAfter(nextFreeSlot);
+      return targetDate.isSameOrAfter(nextFreeSlot);
     });
   };
 
   /**
-   *
+   * add a test to an existing lane, if it has the startDate open.
+   * if not, add a new lane. update the lane's `nextFreeSlot` to
+   * let future tasks be scheduled right after this one.
    * @param task
    */
   private scheduleTask = (task: Task): Task => {
@@ -110,7 +162,7 @@ export default class TaskScheduler {
       nextAvailableLaneIndex = this.scheduledLanes.length - 1;
     }
 
-    const scheduledTask = Object.assign(task);
+    const scheduledTask = { ...task };
 
     scheduledTask.laneIndex = nextAvailableLaneIndex;
 
@@ -118,24 +170,51 @@ export default class TaskScheduler {
   };
 
   /**
-   *
+   * update the scheduled tasks, date range, and lanes.
    */
+  // todo refactor this function to be less ugly
   private updateSchedule = (): void => {
-    // create new lanes from scratch every time
+    // prevent new lanes from being appended to old lanes
     this.scheduledLanes = [];
 
-    // taskList splices in each added item, so the sortIndices need to be updated
+    // as tasks were spliced into the list, their sortIndices were not updated
     const sortedTasks = updateSortIndices(this.sortedTaskList.items);
+    // the first task will always have the earliest startDate.
+    // we need this index immediately to assign tasks' date indexes.
+    // this will ultimately be what defines the grid column range for each task.
+    const earliestStartDate = sortedTasks[0].startDate.clone();
+    const indexedTasks: Task[] = updateDateIndices(
+      sortedTasks,
+      earliestStartDate
+    );
 
-    this.scheduledTasks = sortedTasks.map(this.scheduleTask);
+    const scheduledTasks: Task[] = [];
+    // since tasks are already sorted, only the end date may need updating. we can't
+    // assume which task has it since each task can be arbitrarily long
+    let latestEndDate = sortedTasks[0].startDate.clone();
+
+    indexedTasks.forEach(task => {
+      scheduledTasks.push(this.scheduleTask(task));
+
+      if (task.endDate.isAfter(latestEndDate)) {
+        latestEndDate = task.endDate.clone();
+      }
+    });
+
+    this.scheduledTasks = scheduledTasks;
+    this.scheduledDateRange = {
+      startDate: earliestStartDate,
+      endDate: latestEndDate,
+      totalDays: getDateRangeInclusiveDayCount(earliestStartDate, latestEndDate)
+    };
   };
 
   /**
-   *
-   * @param startingTasksData
+   * create and schedule multiple starting tasks from their data
+   * @param rawTasks the names, start dates and end dates
    */
-  private processStartingTasks = (startingTasksData: RawTaskData[]): void => {
-    startingTasksData.forEach(taskData => {
+  private processStartingTasks = (rawTasks: RawTaskData[]): void => {
+    rawTasks.forEach(taskData => {
       const task = this.generateTask(taskData);
 
       this.sortedTaskList.add(task);
@@ -145,11 +224,11 @@ export default class TaskScheduler {
   };
 
   /**
-   *
-   * @param taskData
+   * create and schedule an individual task, derived from its raw data
+   * @param rawTask the name, start date and end date
    */
-  public add = (taskData: RawTaskData): Task => {
-    const task = this.generateTask(taskData);
+  public add = (rawTask: RawTaskData): Task => {
+    const task = this.generateTask(rawTask);
     const sortIndex = this.sortedTaskList.add(task);
 
     this.updateSchedule();
@@ -162,6 +241,13 @@ export default class TaskScheduler {
    */
   public get tasks(): Task[] {
     return Array.from(this.scheduledTasks);
+  }
+
+  /**
+   * getter for the scheduled date range
+   */
+  public get dateRange(): DateRange {
+    return { ...this.scheduledDateRange };
   }
 
   /**

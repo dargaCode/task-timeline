@@ -7,7 +7,6 @@
 .date-row {
   display: grid;
   grid-row-gap: 10px;
-  grid-template-columns: repeat(10, 10%);
 }
 
 .date {
@@ -19,11 +18,4 @@
   background: lightgray;
   display: grid;
   grid-row-gap: 10px;
-  grid-template-columns: repeat(10, 10%);
-}
-
-.task {
-  background: #999;
-  border: 1px solid black;
-  color: #eee;
 }
