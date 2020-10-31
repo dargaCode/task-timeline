@@ -1,12 +1,16 @@
 import React from "react";
 import TaskScheduler from "../../classes/task-scheduler/TaskScheduler";
-import { Task } from "../../classes/task-scheduler/taskSchedulerUtils";
+import {
+  Task,
+  DateRange
+} from "../../classes/task-scheduler/taskSchedulerUtils";
 import { STARTING_TASKS } from "../timeline-data";
 import TimelineGrid from "../timeline-grid/TimelineGrid";
 
 interface State {
   tasks: Task[];
   laneCount: number;
+  dateRange: DateRange;
 }
 
 export default class TimelineContainer extends React.Component<{}, State> {
@@ -19,7 +23,12 @@ export default class TimelineContainer extends React.Component<{}, State> {
 
     this.state = {
       tasks: [],
-      laneCount: 0
+      laneCount: 0,
+      dateRange: {
+        startDate: undefined,
+        endDate: undefined,
+        totalDays: undefined
+      }
     };
   }
 
@@ -27,12 +36,13 @@ export default class TimelineContainer extends React.Component<{}, State> {
     this.fetchTasks();
   }
 
+  /**
+   * in a real task with a backend this would be an api call
+   */
   fetchTasks(): void {
-    // in a real app with a backend this would be an api call
     const rawTasks = Array.from(STARTING_TASKS);
 
     this.scheduler = new TaskScheduler(rawTasks);
-    // this.scheduler = new TaskScheduler();
 
     this.setState({
       tasks: this.scheduler.tasks,
@@ -41,8 +51,10 @@ export default class TimelineContainer extends React.Component<{}, State> {
   }
 
   render(): JSX.Element {
-    const { tasks, laneCount } = this.state;
+    const { tasks, laneCount, dateRange } = this.state;
 
-    return <TimelineGrid tasks={tasks} laneCount={laneCount} />;
+    return (
+      <TimelineGrid tasks={tasks} laneCount={laneCount} dateRange={dateRange} />
+    );
   }
 }

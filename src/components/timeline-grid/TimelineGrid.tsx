@@ -1,6 +1,9 @@
 import React from "react";
 import moment from "moment";
-import { Task } from "../../classes/task-scheduler/taskSchedulerUtils";
+import {
+  DateRange,
+  Task
+} from "../../classes/task-scheduler/taskSchedulerUtils";
 import TaskCard from "../task-card/TaskCard";
 import {
   DATE_FORMAT,
@@ -12,6 +15,7 @@ import styles from "./TimelineGrid.module.scss";
 interface Props {
   tasks: Task[];
   laneCount: number;
+  dateRange: DateRange;
 }
 
 interface State {}
@@ -22,7 +26,7 @@ export default class TimelineGrid extends React.Component<Props, State> {
   }
 
   render(): JSX.Element {
-    const { tasks, laneCount } = this.props;
+    const { tasks, laneCount, dateRange } = this.props;
 
     // todo move this up one level? Add logic into TaskScheduler to track earliest and latest dates
     // then these won't be hardcoded
