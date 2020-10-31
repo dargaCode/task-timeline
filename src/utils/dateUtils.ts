@@ -5,9 +5,13 @@ export function getOneDayAfter(date: moment.Moment): moment.Moment {
 }
 
 export function getNSequentialDays(
-  startDate: moment.Moment,
-  dayCount: number
+  startDate?: moment.Moment,
+  dayCount?: number
 ): moment.Moment[] {
+  if (!startDate || !dayCount) {
+    return [];
+  }
+
   const dates: moment.Moment[] = [];
   const currentDate = startDate.clone();
 
