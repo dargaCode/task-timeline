@@ -1,0 +1,15 @@
+@use '../../config';
+
+.date-row {
+  display: grid;
+  grid-row-gap: 10px;
+}
+
+.date {
+  background: #d8d8d8;
+  grid-row: 1;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

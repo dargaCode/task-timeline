@@ -2,23 +2,13 @@ import React from "react";
 import moment from "moment";
 import { Task } from "../../classes/task-scheduler/taskSchedulerUtils";
 import TaskCard from "../task-card/TaskCard";
-import { DATE_FORMAT_TIMELINE_DATE } from "../../utils/dateConstants";
 import styles from "./Timeline.module.scss";
+import DateHeaderRow from "../date-header-row/DateHeaderRow";
 
 interface Props {
   tasks: Task[];
   columnDates: moment.Moment[];
   columnCount: number;
-}
-
-function getColumnDateHeaders(columnDates: moment.Moment[]): JSX.Element[] {
-  return columnDates.map(date => {
-    return (
-      <div key={date.dayOfYear()} className={styles.date}>
-        {date.format(DATE_FORMAT_TIMELINE_DATE)}
-      </div>
-    );
-  });
 }
 
 /**
@@ -28,24 +18,20 @@ function getColumnDateHeaders(columnDates: moment.Moment[]): JSX.Element[] {
 export default function Timeline(props: Props): JSX.Element {
   const { tasks, columnDates, columnCount } = props;
 
-  const templateColumnsSetting = `repeat(${columnCount}, 10%)`;
+  const gridColumnsSetting = `repeat(${columnCount}, 10%)`;
 
   return (
     <div className={styles.container}>
       <div className={styles.timeline}>
-        <div
-          className={styles.dateRow}
-          style={{
-            gridTemplateColumns: templateColumnsSetting
-          }}
-        >
-          {getColumnDateHeaders(columnDates)}
-        </div>
+        <DateHeaderRow
+          columnDates={columnDates}
+          gridColumnsSetting={gridColumnsSetting}
+        />
 
         <div
           className={styles.grid}
           style={{
-            gridTemplateColumns: templateColumnsSetting
+            gridTemplateColumns: gridColumnsSetting
           }}
         >
           {tasks.map(task => {
