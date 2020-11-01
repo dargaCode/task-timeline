@@ -394,3 +394,113 @@ export const ADD_TASK_INCREASED_LANES: Lane[] = [
   { nextFreeSlot: moment("2018-02-16", DATE_FORMAT) },
   { nextFreeSlot: moment("2018-02-16", DATE_FORMAT) }
 ];
+
+/* removing tasks */
+
+// starting task data to pass to the scheduler constructor
+export const STARTING_TASKS_DELETE: RawTaskData[] = [
+  {
+    start: "2018-01-10",
+    end: "2018-01-13",
+    name: "Alpha"
+  },
+  {
+    start: "2018-01-06",
+    end: "2018-01-06",
+    name: "Beta"
+  },
+  {
+    start: "2018-01-10",
+    end: "2018-01-10",
+    name: "Charlie"
+  },
+  {
+    start: "2018-01-09",
+    end: "2018-01-12",
+    name: "Delta"
+  },
+  {
+    start: "2018-02-05",
+    end: "2018-02-15",
+    name: "Echo"
+  },
+  {
+    start: "2018-01-11",
+    end: "2018-02-13",
+    name: "Foxtrot"
+  },
+  {
+    start: "2018-02-07",
+    end: "2018-02-09",
+    name: ""
+  }
+];
+
+export const REMOVE_ID_NO_DECREASED_LANES_OR_RANGE = 6;
+
+export const REMOVE_ID_DECREASED_LANES_AND_RANGE = 5;
+
+// resultant scheduling after adding `ADD_TASK_DATA_NEW_LANE`
+export const SCHEDULE_SUMMARY_REDUCED_LANES_AND_RANGE: ScheduleSummary = {
+  1: {
+    startDateIndex: 4,
+    endDateIndex: 8,
+    sortIndex: 4,
+    laneIndex: 2
+  },
+  2: {
+    startDateIndex: 0,
+    endDateIndex: 1,
+    sortIndex: 0,
+    laneIndex: 0
+  },
+  3: {
+    startDateIndex: 4,
+    endDateIndex: 5,
+    sortIndex: 3,
+    laneIndex: 0
+  },
+  4: {
+    startDateIndex: 3,
+    endDateIndex: 7,
+    sortIndex: 2,
+    laneIndex: 1
+  },
+  6: {
+    startDateIndex: 5,
+    endDateIndex: 8,
+    sortIndex: 5,
+    laneIndex: 0
+  },
+  7: {
+    startDateIndex: 1,
+    endDateIndex: 4,
+    sortIndex: 1,
+    laneIndex: 0
+  }
+};
+
+export const REMOVE_TASK_STARTING_LANES: Lane[] = [
+  { nextFreeSlot: moment("2018-01-16", DATE_FORMAT) },
+  { nextFreeSlot: moment("2018-01-14", DATE_FORMAT) },
+  { nextFreeSlot: moment("2018-01-13", DATE_FORMAT) },
+  { nextFreeSlot: moment("2018-01-14", DATE_FORMAT) }
+];
+
+export const REMOVE_STARTING_TASKS_DATE_RANGE: DateRange = {
+  startDate: moment("2018-01-05", DATE_FORMAT),
+  endDate: moment("2018-01-15", DATE_FORMAT),
+  totalDays: 11
+};
+
+export const REMOVE_TASK_DECREASED_LANES: Lane[] = [
+  { nextFreeSlot: moment("2018-01-14", DATE_FORMAT) },
+  { nextFreeSlot: moment("2018-01-13", DATE_FORMAT) },
+  { nextFreeSlot: moment("2018-01-14", DATE_FORMAT) }
+];
+
+export const REMOVE_TASKS_DECREASED_DATE_RANGE: DateRange = {
+  startDate: moment("2018-01-06", DATE_FORMAT),
+  endDate: moment("2018-01-13", DATE_FORMAT),
+  totalDays: 9
+};
