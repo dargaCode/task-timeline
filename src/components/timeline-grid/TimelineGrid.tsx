@@ -11,6 +11,16 @@ interface Props {
   columnCount: number;
 }
 
+function getColumnDateHeaders(columnDates: moment.Moment[]): JSX.Element[] {
+  return columnDates.map(date => {
+    return (
+      <div key={date.dayOfYear()} className={styles.date}>
+        {date.format(DATE_FORMAT_TIMELINE_DATE)}
+      </div>
+    );
+  });
+}
+
 /**
  * timeline grid renders the date headers, the schedule grid, and
  * the tasks themselves.
@@ -22,31 +32,26 @@ export default function TimelineGrid(props: Props): JSX.Element {
 
   return (
     <div className={styles.container}>
-      <div
-        className={styles.dateRow}
-        style={{
-          gridTemplateColumns: templateColumnsSetting
-        }}
-      >
-        {/* todo extract to own method */}
-        {columnDates.map(date => {
-          return (
-            <div key={date.dayOfYear()} className={styles.date}>
-              {date.format(DATE_FORMAT_TIMELINE_DATE)}
-            </div>
-          );
-        })}
-      </div>
+      <div className={styles.timeline}>
+        <div
+          className={styles.dateRow}
+          style={{
+            gridTemplateColumns: templateColumnsSetting
+          }}
+        >
+          {getColumnDateHeaders(columnDates)}
+        </div>
 
-      <div
-        className={styles.grid}
-        style={{
-          gridTemplateColumns: templateColumnsSetting
-        }}
-      >
-        {tasks.map(task => {
-          return <TaskCard key={task.id} task={task} />;
-        })}
+        <div
+          className={styles.grid}
+          style={{
+            gridTemplateColumns: templateColumnsSetting
+          }}
+        >
+          {tasks.map(task => {
+            return <TaskCard key={task.id} task={task} />;
+          })}
+        </div>
       </div>
     </div>
   );
