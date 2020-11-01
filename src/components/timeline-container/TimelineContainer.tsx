@@ -23,8 +23,6 @@ export default class TimelineContainer extends React.Component<{}, State> {
   constructor(props: {}) {
     super(props);
 
-    this.scheduler = undefined;
-
     this.state = {
       tasks: [],
       dateRange: {
@@ -38,6 +36,21 @@ export default class TimelineContainer extends React.Component<{}, State> {
   componentDidMount(): void {
     this.fetchTasks();
   }
+
+  handleTaskDelete = (event: React.MouseEvent): void => {
+    event.preventDefault();
+
+    const target = event.target as HTMLDivElement;
+
+    if (this.scheduler) {
+      this.scheduler.remove(Number(target.id));
+
+      this.setState({
+        tasks: this.scheduler.tasks,
+        dateRange: this.scheduler?.dateRange
+      });
+    }
+  };
 
   /**
    * in a real task with a backend this would be an api call
@@ -68,6 +81,7 @@ export default class TimelineContainer extends React.Component<{}, State> {
         tasks={tasks}
         columnDates={columnDates || []}
         columnCount={totalDays || 0}
+        onTaskDelete={this.handleTaskDelete}
       />
     );
   }
