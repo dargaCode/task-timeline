@@ -3,7 +3,7 @@ import moment from "moment";
 import { Task } from "../../classes/task-scheduler/taskSchedulerUtils";
 import TaskCard from "../task-card/TaskCard";
 import { DATE_FORMAT_TIMELINE_DATE } from "../../utils/dateConstants";
-import styles from "./TimelineGrid.module.scss";
+import styles from "./Timeline.module.scss";
 
 interface Props {
   tasks: Task[];
@@ -22,10 +22,10 @@ function getColumnDateHeaders(columnDates: moment.Moment[]): JSX.Element[] {
 }
 
 /**
- * timeline grid renders the date headers, the schedule grid, and
+ * timeline renders the date headers, the schedule grid, and
  * the tasks themselves.
  */
-export default function TimelineGrid(props: Props): JSX.Element {
+export default function Timeline(props: Props): JSX.Element {
   const { tasks, columnDates, columnCount } = props;
 
   const templateColumnsSetting = `repeat(${columnCount}, 10%)`;
