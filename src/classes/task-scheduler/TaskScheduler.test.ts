@@ -190,6 +190,49 @@ describe("TaskScheduler", () => {
     });
   });
 
+  describe(".remove()", () => {
+    it("should remove the task with the given id from its tasks", () => {});
+
+    it("should not allow the next added task to use its id", () => {});
+
+    it("should update the remaining tasks' sortIndex", () => {});
+
+    it("should reschedule all the remaining tasks", () => {});
+
+    it("should update the remaining tasks' laneIndex", () => {});
+
+    it("should update the remaining tasks' date indices", () => {});
+
+    describe("when removing it would not result in empty lanes", () => {
+      it("should not reduce the lane count", () => {});
+    });
+
+    describe("when removing it would result in empty lanes", () => {
+      it("should reduce the lane count", () => {});
+    });
+
+    it("should update every lane's nextFreeSlot", () => {});
+
+    describe("when the task doesn't have the earliest start or latest end", () => {
+      it("should not reduce the date range", () => {});
+    });
+
+    describe("when the task has the earliest start and/or latest end", () => {
+      it("should reduce the date range", () => {});
+    });
+  });
+
+  describe(".modify()", () => {
+    it.skip("should remove the task of the given id", () => {
+      // todo
+    });
+
+    // maybe this isn't ideal, since it would cause the event to have a new id
+    it.skip("should add a new task with the updated properties", () => {
+      // todo
+    });
+  });
+
   describe(".tasks (getter)", () => {
     it("should return a copy of the scheduler items", () => {
       // they are copies, not the same ref
@@ -208,47 +251,6 @@ describe("TaskScheduler", () => {
     it("should return a copy of the scheduler lanes", () => {
       // they are copies, not the same ref
       expect(scheduler.lanes).not.toBe(scheduler.lanes);
-    });
-  });
-
-  describe(".remove()", () => {
-    it.skip("should remove the task with the given id from its tasks", () => {
-      // todo
-    });
-
-    it.skip("should update the remaining tasks' sortIndex", () => {
-      // todo
-    });
-
-    describe("when removing it would result in empty lane(s)", () => {
-      it.skip("should remove all empty lanes", () => {
-        // todo
-      });
-    });
-
-    describe("when removing it would not result in empty lane(s)", () => {
-      it.skip("should not remove any lanes", () => {
-        // todo
-      });
-    });
-
-    it.skip("should update the remaining tasks' laneIndex", () => {
-      // todo
-    });
-
-    it.skip("should update every lane's nextFreeSlot", () => {
-      // todo
-    });
-  });
-
-  describe(".modify()", () => {
-    it.skip("should remove the task of the given id", () => {
-      // todo
-    });
-
-    // maybe this isn't ideal, since it would cause the event to have a new id
-    it.skip("should add a new task with the updated properties", () => {
-      // todo
     });
   });
 });
