@@ -206,7 +206,7 @@ describe("TaskScheduler", () => {
     it("should remove the task with the given id from its tasks", () => {
       scheduler.remove(REMOVE_ID_DECREASED_LANES_AND_RANGE);
 
-      const removedTaskIndex = scheduler.tasks.find(task => {
+      const removedTaskIndex = scheduler.tasks.findIndex(task => {
         return task.id === REMOVE_ID_DECREASED_LANES_AND_RANGE;
       });
 

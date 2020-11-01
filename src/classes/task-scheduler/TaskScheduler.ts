@@ -237,6 +237,21 @@ export default class TaskScheduler {
   };
 
   /**
+   * remove the task with the provided dict from the schedule
+   * @param removedTaskId
+   */
+  public remove = (removedTaskId: number): void => {
+    // todo for high amounts of tasks, a dictionary lookup would before better
+    const removedTaskIndex = this.scheduledTasks.findIndex(task => {
+      return task.id === removedTaskId;
+    });
+
+    this.sortedTaskList.remove(removedTaskIndex);
+
+    this.updateSchedule();
+  };
+
+  /**
    * getter for the scheduled tasks
    */
   public get tasks(): Task[] {

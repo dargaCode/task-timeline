@@ -420,19 +420,19 @@ export const REMOVE_STARTING_TASKS: RawTaskData[] = [
     name: "Delta"
   },
   {
-    start: "2018-02-05",
-    end: "2018-02-15",
+    start: "2018-01-05",
+    end: "2018-01-15",
     name: "Echo"
   },
   {
     start: "2018-01-11",
-    end: "2018-02-13",
+    end: "2018-01-13",
     name: "Foxtrot"
   },
   {
-    start: "2018-02-07",
-    end: "2018-02-09",
-    name: ""
+    start: "2018-01-07",
+    end: "2018-01-09",
+    name: "Gamma"
   }
 ];
 
@@ -507,5 +507,5 @@ export const REMOVE_TASK_DECREASED_LANES: Lane[] = [
 export const REMOVE_TASKS_DECREASED_DATE_RANGE: DateRange = {
   startDate: moment("2018-01-06", DATE_FORMAT),
   endDate: moment("2018-01-13", DATE_FORMAT),
-  totalDays: 9
+  totalDays: 8
 };
