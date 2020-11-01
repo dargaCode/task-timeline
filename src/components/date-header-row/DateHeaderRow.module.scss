@@ -1,0 +1,27 @@
+@use '../../config';
+
+.header-row {
+  background: #d8d8d8;
+}
+
+.month-row {
+  border: 1px solid black;
+  display: grid;
+}
+
+.day-row {
+  border: 1px solid black;
+  display: grid;
+}
+
+.month {
+  text-align: center;
+}
+
+.day {
+  border-left: 1px solid black;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

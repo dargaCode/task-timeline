@@ -1,0 +1,17 @@
+@use "../../config";
+
+.container {
+  margin: 40px;
+}
+
+.timeline {
+  background: #bbb;
+  font-size: 15px;
+  overflow-y: scroll;
+}
+
+.grid {
+  display: grid;
+  grid-row-gap: 10px;
+  padding: 10px 0;
+}
