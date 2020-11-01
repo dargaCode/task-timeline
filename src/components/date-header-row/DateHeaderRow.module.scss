@@ -1,13 +1,25 @@
 @use '../../config';
 
-.date-row {
-  display: grid;
-  grid-row-gap: 10px;
+.header-row {
+  background: #d8d8d8;
 }
 
-.date {
-  background: #d8d8d8;
-  grid-row: 1;
+.month-row {
+  border: 1px solid black;
+  display: grid;
+}
+
+.day-row {
+  border: 1px solid black;
+  display: grid;
+}
+
+.month {
+  text-align: center;
+}
+
+.day {
+  border-left: 1px solid black;
   overflow: hidden;
   text-align: center;
   text-overflow: ellipsis;

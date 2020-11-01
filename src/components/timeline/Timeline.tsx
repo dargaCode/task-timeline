@@ -18,7 +18,7 @@ interface Props {
 export default function Timeline(props: Props): JSX.Element {
   const { tasks, columnDates, columnCount } = props;
 
-  const gridColumnsSetting = `repeat(${columnCount}, 10%)`;
+  const gridColumnsSetting = `repeat(${columnCount}, 5%)`;
 
   return (
     <div className={styles.container}>
@@ -27,7 +27,6 @@ export default function Timeline(props: Props): JSX.Element {
           columnDates={columnDates}
           gridColumnsSetting={gridColumnsSetting}
         />
-
         <div
           className={styles.grid}
           style={{
