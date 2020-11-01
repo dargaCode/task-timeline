@@ -10,7 +10,15 @@ import {
   SCHEDULED_TASK_NEW_LANE,
   SCHEDULE_SUMMARY_NEW_LANE,
   ADD_TASK_INCREASED_LANES,
-  ADD_TASK_NEW_LANE_INCREASED_DATE_RANGE
+  ADD_TASK_NEW_LANE_INCREASED_DATE_RANGE,
+  REMOVE_STARTING_TASKS,
+  REMOVE_STARTING_TASKS_DATE_RANGE,
+  REMOVE_STARTING_TASKS_LANES,
+  REMOVE_ID_NO_DECREASED_LANES_OR_RANGE,
+  REMOVE_ID_DECREASED_LANES_AND_RANGE,
+  REMOVE_TASKS_DECREASED_DATE_RANGE,
+  REMOVE_TASK_DECREASED_LANES,
+  SCHEDULE_SUMMARY_DECREASED_LANES_AND_RANGE
 } from "./mockTaskSchedulerData";
 import { DATE_FORMAT } from "../../utils/dateConstants";
 
@@ -191,34 +199,114 @@ describe("TaskScheduler", () => {
   });
 
   describe(".remove()", () => {
-    it("should remove the task with the given id from its tasks", () => {});
+    beforeEach(() => {
+      scheduler = new TaskScheduler(REMOVE_STARTING_TASKS);
+    });
 
-    it("should not allow the next added task to use its id", () => {});
+    it("should remove the task with the given id from its tasks", () => {
+      scheduler.remove(REMOVE_ID_DECREASED_LANES_AND_RANGE);
 
-    it("should update the remaining tasks' sortIndex", () => {});
+      const removedTaskIndex = scheduler.tasks.find(task => {
+        return task.id === REMOVE_ID_DECREASED_LANES_AND_RANGE;
+      });
 
-    it("should reschedule all the remaining tasks", () => {});
+      expect(removedTaskIndex).toBe(-1);
+    });
 
-    it("should update the remaining tasks' laneIndex", () => {});
+    it("should not allow the next added task to use its id", () => {
+      scheduler.remove(REMOVE_ID_DECREASED_LANES_AND_RANGE);
 
-    it("should update the remaining tasks' date indices", () => {});
+      const scheduledTask = scheduler.add(ADD_TASK_DATA_NEW_LANE);
+
+      expect(scheduledTask.id).not.toBe(REMOVE_ID_DECREASED_LANES_AND_RANGE);
+    });
+
+    it("should update the remaining tasks' sortIndex", () => {
+      scheduler.remove(REMOVE_ID_DECREASED_LANES_AND_RANGE);
+
+      scheduler.tasks.forEach(task => {
+        const { id, sortIndex } = task;
+
+        expect(sortIndex).toBe(
+          SCHEDULE_SUMMARY_DECREASED_LANES_AND_RANGE[id].sortIndex
+        );
+      });
+    });
+
+    it("should update the remaining tasks' laneIndex", () => {
+      scheduler.remove(REMOVE_ID_DECREASED_LANES_AND_RANGE);
+
+      scheduler.tasks.forEach(task => {
+        const { id, laneIndex } = task;
+
+        expect(laneIndex).toBe(
+          SCHEDULE_SUMMARY_DECREASED_LANES_AND_RANGE[id].laneIndex
+        );
+      });
+    });
+
+    it("should update the remaining tasks' date indices", () => {
+      scheduler.remove(REMOVE_ID_DECREASED_LANES_AND_RANGE);
+
+      scheduler.tasks.forEach(task => {
+        const { id } = task;
+
+        expect(task.startDateIndex).toBe(
+          SCHEDULE_SUMMARY_DECREASED_LANES_AND_RANGE[id].startDateIndex
+        );
+        expect(task.endDateIndex).toBe(
+          SCHEDULE_SUMMARY_DECREASED_LANES_AND_RANGE[id].endDateIndex
+        );
+      });
+    });
 
     describe("when removing it would not result in empty lanes", () => {
-      it("should not reduce the lane count", () => {});
+      it("should not reduce the lane count", () => {
+        scheduler.remove(REMOVE_ID_NO_DECREASED_LANES_OR_RANGE);
+
+        expect(scheduler.lanes).toHaveLength(
+          REMOVE_STARTING_TASKS_LANES.length
+        );
+      });
     });
 
     describe("when removing it would result in empty lanes", () => {
-      it("should reduce the lane count", () => {});
+      it("should reduce the lane count", () => {
+        scheduler.remove(REMOVE_ID_DECREASED_LANES_AND_RANGE);
+
+        expect(scheduler.lanes).toHaveLength(
+          REMOVE_TASK_DECREASED_LANES.length
+        );
+      });
     });
 
-    it("should update every lane's nextFreeSlot", () => {});
+    it("should update every lane's nextFreeSlot", () => {
+      scheduler.remove(REMOVE_ID_DECREASED_LANES_AND_RANGE);
+
+      scheduler.lanes.forEach((lane, i) => {
+        const laneSlotDate = lane.nextFreeSlot.format(DATE_FORMAT);
+        const expectedLaneSlotDate = REMOVE_TASK_DECREASED_LANES[
+          i
+        ].nextFreeSlot.format(DATE_FORMAT);
+
+        expect(laneSlotDate).toBe(expectedLaneSlotDate);
+      });
+    });
 
     describe("when the task doesn't have the earliest start or latest end", () => {
-      it("should not reduce the date range", () => {});
+      it("should not reduce the date range", () => {
+        scheduler.remove(REMOVE_ID_NO_DECREASED_LANES_OR_RANGE);
+
+        expect(scheduler.dateRange).toEqual(REMOVE_STARTING_TASKS_DATE_RANGE);
+      });
     });
 
     describe("when the task has the earliest start and/or latest end", () => {
-      it("should reduce the date range", () => {});
+      it("should reduce the date range", () => {
+        scheduler.remove(REMOVE_ID_DECREASED_LANES_AND_RANGE);
+
+        expect(scheduler.dateRange).toEqual(REMOVE_TASKS_DECREASED_DATE_RANGE);
+      });
     });
   });
 
