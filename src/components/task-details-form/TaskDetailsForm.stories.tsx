@@ -6,4 +6,12 @@ export default {
   component: TaskDetailsForm
 };
 
-export const Basic = (): JSX.Element => <TaskDetailsForm />;
+export const Basic = (): JSX.Element => (
+  <TaskDetailsForm
+    onSubmit={event => {
+      event.preventDefault();
+
+      console.log(event.target);
+    }}
+  />
+);
