@@ -1,6 +1,26 @@
 import React from "react";
 import styles from "./TaskDetailsForm.module.scss";
 
+// todo delete me
+function getNotes(): JSX.Element {
+  return (
+    <div className={styles.notes}>
+      {/* eslint-disable-next-line spellcheck/spell-checker */}
+      {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
+      <h3>// TODO</h3>
+      <ol>
+        <li>`Add Task` button, show/hide form</li>
+        <li>Modal wrapper</li>
+        <li>Better flow for deleting tasks</li>
+        <li>Task tooltip (name, edit, delete)</li>
+        <li>Modifying tasks (reuse form/modal)</li>
+        <li>Convert scrolling to pagination</li>
+        <li>Add zoom</li>
+      </ol>
+    </div>
+  );
+}
+
 interface Props {
   onSubmit: (event: React.FormEvent) => void;
   minInputDate?: string;
@@ -101,6 +121,8 @@ export default class TaskDetailsForm extends React.Component<Props, State> {
             <input type="submit" value="Submit" />
           </div>
         </form>
+        {/* // todo delete me */}
+        {getNotes()}
       </div>
     );
   }

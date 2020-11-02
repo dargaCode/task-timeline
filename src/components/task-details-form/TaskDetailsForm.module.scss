@@ -1,5 +1,22 @@
 @use "../../config";
 
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+// todo delete me
+.notes {
+  min-width: 500px;
+  h3 {
+    margin: 0 0 6px;
+  }
+  ol {
+    margin: 0;
+  }
+}
+
 form {
   background: lightgray;
   max-width: 350px;
