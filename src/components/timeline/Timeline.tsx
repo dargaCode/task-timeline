@@ -6,7 +6,7 @@ import styles from "./Timeline.module.scss";
 import TableHeader from "../table-header/TableHeader";
 
 // eslint-disable-next-line spellcheck/spell-checker
-const COLUMN_WIDTH = "75px";
+const COLUMN_WIDTH = "85px";
 
 interface Props {
   tasks: Task[];
