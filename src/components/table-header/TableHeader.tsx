@@ -2,9 +2,10 @@ import React from "react";
 import moment from "moment";
 import styles from "./TableHeader.module.scss";
 import {
-  DATE_FORMAT_TIMELINE_MONTH,
   DATE_FORMAT_TIMELINE_DATE,
-  DATE_FORMAT
+  DATE_FORMAT,
+  DATE_FORMAT_YEAR,
+  DATE_FORMAT_MONTH
 } from "../../utils/dateConstants";
 
 interface Props {
@@ -12,21 +13,18 @@ interface Props {
   gridColumnsSetting: string;
 }
 
-function getMonthText(date: moment.Moment, dateIndex: number): string {
-  const dayOfMonth = date.date();
-
-  return dayOfMonth === 1 || dateIndex === 0
-    ? date.format(DATE_FORMAT_TIMELINE_MONTH)
-    : "";
-}
-
+/**
+ * create an element for the first date in the timeline,
+ * as well as for the first of every month
+ * @param columnDates
+ */
 function getMonthItems(columnDates: moment.Moment[]): JSX.Element[] {
   const monthItems: JSX.Element[] = [];
 
   columnDates.forEach((date, i) => {
-    const monthText = getMonthText(date, i);
+    const needMonth = date.date() === 1 || i === 0;
 
-    if (monthText) {
+    if (needMonth) {
       monthItems.push(
         <div
           key={date.format(DATE_FORMAT)}
@@ -35,7 +33,8 @@ function getMonthItems(columnDates: moment.Moment[]): JSX.Element[] {
             gridColumnStart: `${i + 1}`
           }}
         >
-          {monthText}
+          <div>{date.format(DATE_FORMAT_YEAR)}</div>
+          <div>{date.format(DATE_FORMAT_MONTH)}</div>
         </div>
       );
     }
