@@ -27,7 +27,7 @@ export default function Timeline(props: Props): JSX.Element {
     // false positive
     // eslint-disable-next-line css-modules/no-undef-class
     <div className={styles.container}>
-      <h2>Task Timeline</h2>
+      <h1>Task Timeline</h1>
 
       <div className={styles.timeline}>
         <TableHeader
