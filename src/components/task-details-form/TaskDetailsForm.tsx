@@ -26,13 +26,25 @@ export default class TaskDetailsForm extends React.Component<Props, State> {
     this.setState({ [target.id]: target.value });
   };
 
-  render(): JSX.Element {
+  handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+
     const { onSubmit } = this.props;
+
+    const syntheticEvent: any = {
+      preventDefault: () => null,
+      target: { value: { ...this.state } }
+    };
+
+    onSubmit(syntheticEvent);
+  };
+
+  render(): JSX.Element {
     const { name, startDate, endDate } = this.state;
 
     return (
       <div>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={this.handleSubmit}>
           {/* define via prop later, for edit */}
           <h2>Create Task</h2>
 

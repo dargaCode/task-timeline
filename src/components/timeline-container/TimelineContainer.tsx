@@ -3,10 +3,12 @@ import { STARTING_TASKS } from "../timeline-data";
 import TaskScheduler from "../../classes/task-scheduler/TaskScheduler";
 import {
   Task,
-  DateRange
+  DateRange,
+  RawTaskData
 } from "../../classes/task-scheduler/taskSchedulerUtils";
 import { getNSequentialDaysFromStart } from "../../utils/dateUtils";
 import Timeline from "../timeline/Timeline";
+import TaskDetailsForm from "../task-details-form/TaskDetailsForm";
 
 interface State {
   tasks: Task[];
@@ -36,6 +38,34 @@ export default class TimelineContainer extends React.Component<{}, State> {
   componentDidMount(): void {
     this.fetchTasks();
   }
+
+  /**
+   * create a new task when the user submits the form
+   * @param event
+   */
+  handleTaskCreate = (event: React.FormEvent): void => {
+    event.preventDefault();
+
+    // make sure .id is accessible
+    const target = event.target as HTMLFormElement;
+
+    const { name, startDate, endDate } = target.value;
+
+    const taskData: RawTaskData = {
+      name,
+      start: startDate,
+      end: endDate
+    };
+
+    if (this.scheduler) {
+      this.scheduler.add(taskData);
+
+      this.setState({
+        tasks: this.scheduler.tasks,
+        dateRange: this.scheduler?.dateRange
+      });
+    }
+  };
 
   /**
    * delete the event if user presses delete key while focused, or clicks the div
@@ -87,12 +117,17 @@ export default class TimelineContainer extends React.Component<{}, State> {
     }
 
     return (
-      <Timeline
-        tasks={tasks}
-        columnDates={columnDates || []}
-        columnCount={totalDays || 0}
-        onTaskDelete={this.handleTaskDelete}
-      />
+      <div>
+        <h1>Task Timeline</h1>
+        <Timeline
+          tasks={tasks}
+          columnDates={columnDates || []}
+          columnCount={totalDays || 0}
+          onTaskDelete={this.handleTaskDelete}
+        />
+
+        <TaskDetailsForm onSubmit={this.handleTaskCreate} />
+      </div>
     );
   }
 }

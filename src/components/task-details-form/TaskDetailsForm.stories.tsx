@@ -9,7 +9,7 @@ export default {
 
 export const Basic = (): JSX.Element => (
   <TaskDetailsForm
-    onSubmit={event => {
+    onSubmit={(event: React.FormEvent): void => {
       event.preventDefault();
 
       action("onSubmit");
