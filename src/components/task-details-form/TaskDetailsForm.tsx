@@ -43,7 +43,9 @@ export default class TaskDetailsForm extends React.Component<Props, State> {
     const { name, startDate, endDate } = this.state;
 
     return (
-      <div>
+      // false positive
+      // eslint-disable-next-line css-modules/no-undef-class
+      <div className={styles.container}>
         <form onSubmit={this.handleSubmit}>
           {/* define via prop later, for edit */}
           <h2>Create Task</h2>

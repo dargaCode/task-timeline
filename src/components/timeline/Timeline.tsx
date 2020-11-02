@@ -22,6 +22,8 @@ export default function Timeline(props: Props): JSX.Element {
   const gridColumnsSetting = `repeat(${columnCount}, 5%)`;
 
   return (
+    // false positive
+    // eslint-disable-next-line css-modules/no-undef-class
     <div className={styles.container}>
       <div className={styles.timeline}>
         <DateHeaderRow
