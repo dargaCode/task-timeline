@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import { STARTING_TASKS } from "../timeline-data";
 import TaskScheduler from "../../classes/task-scheduler/TaskScheduler";
 import {
@@ -6,7 +7,11 @@ import {
   DateRange,
   RawTaskData
 } from "../../classes/task-scheduler/taskSchedulerUtils";
-import { getNSequentialDaysFromStart } from "../../utils/dateUtils";
+import { DATE_FORMAT } from "../../utils/dateConstants";
+import {
+  getNSequentialDaysFromStart,
+  isDateRangeValid
+} from "../../utils/dateUtils";
 import Timeline from "../timeline/Timeline";
 import TaskDetailsForm from "../task-details-form/TaskDetailsForm";
 
@@ -57,10 +62,18 @@ export default class TimelineContainer extends React.Component<{}, State> {
     // make sure .value is accessible
     const target = event.target as HTMLFormElement;
     const { name, startDate, endDate } = target.value;
+
+    // todo add better validation
+    const validRateRange = isDateRangeValid(
+      moment(startDate, DATE_FORMAT),
+      moment(endDate, DATE_FORMAT)
+    );
+
     const taskData: RawTaskData = {
       name,
       start: startDate,
-      end: endDate
+      // when end is before start, change to single day task
+      end: validRateRange ? endDate : startDate
     };
 
     if (this.scheduler) {
