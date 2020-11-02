@@ -31,6 +31,7 @@ export default class TaskDetailsForm extends React.Component<Props, State> {
 
     const { onSubmit } = this.props;
 
+    // todo how to properly type this as an FormEvent?
     const syntheticEvent: any = {
       preventDefault: () => null,
       target: { value: { ...this.state } }
