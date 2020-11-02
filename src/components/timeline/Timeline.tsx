@@ -5,6 +5,9 @@ import TaskCard from "../task-card/TaskCard";
 import styles from "./Timeline.module.scss";
 import TableHeader from "../table-header/TableHeader";
 
+// eslint-disable-next-line spellcheck/spell-checker
+const COLUMN_WIDTH = "75px";
+
 interface Props {
   tasks: Task[];
   columnDates: moment.Moment[];
@@ -18,8 +21,7 @@ interface Props {
  */
 export default function Timeline(props: Props): JSX.Element {
   const { tasks, columnDates, columnCount, onTaskDelete } = props;
-
-  const gridColumnsSetting = `repeat(${columnCount}, 5%)`;
+  const gridColumnsSetting = `repeat(${columnCount}, ${COLUMN_WIDTH})`;
 
   return (
     // false positive
