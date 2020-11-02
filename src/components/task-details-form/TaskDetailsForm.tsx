@@ -3,6 +3,8 @@ import styles from "./TaskDetailsForm.module.scss";
 
 interface Props {
   onSubmit: (event: React.FormEvent) => void;
+  minInputDate?: string;
+  maxInputDate?: string;
 }
 
 interface State {
@@ -41,6 +43,7 @@ export default class TaskDetailsForm extends React.Component<Props, State> {
   };
 
   render(): JSX.Element {
+    const { minInputDate, maxInputDate } = this.props;
     const { name, startDate, endDate } = this.state;
 
     return (
@@ -71,6 +74,8 @@ export default class TaskDetailsForm extends React.Component<Props, State> {
             <input
               id="startDate"
               type="date"
+              min={minInputDate}
+              max={maxInputDate}
               value={startDate}
               onChange={this.handleChange}
               required
@@ -84,6 +89,8 @@ export default class TaskDetailsForm extends React.Component<Props, State> {
             <input
               id="endDate"
               type="date"
+              min={minInputDate}
+              max={maxInputDate}
               value={endDate}
               onChange={this.handleChange}
               required

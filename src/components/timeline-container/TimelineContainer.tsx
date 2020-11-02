@@ -10,6 +10,14 @@ import { getNSequentialDaysFromStart } from "../../utils/dateUtils";
 import Timeline from "../timeline/Timeline";
 import TaskDetailsForm from "../task-details-form/TaskDetailsForm";
 
+/**
+ *  todo restricting date ranges until pagination is in.
+ *  otherwise the app seems to hit the limit or maximum grid size or
+ *  number of items in a grid.
+ */
+const MINIMUM_SCHEDULABLE_DATE = "2017-01-01";
+const MAXIMUM_SCHEDULABLE_DATE = "2018-12-31";
+
 interface State {
   tasks: Task[];
   dateRange: DateRange;
@@ -122,7 +130,11 @@ export default class TimelineContainer extends React.Component<{}, State> {
           columnCount={totalDays || 0}
           onTaskDelete={this.handleTaskDelete}
         />
-        <TaskDetailsForm onSubmit={this.handleTaskCreate} />
+        <TaskDetailsForm
+          onSubmit={this.handleTaskCreate}
+          minInputDate={MINIMUM_SCHEDULABLE_DATE}
+          maxInputDate={MAXIMUM_SCHEDULABLE_DATE}
+        />
       </div>
     );
   }
