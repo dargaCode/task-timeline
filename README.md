@@ -8,7 +8,7 @@
   - `npm run test`
 - Run eslint and prettier:
   - `npm run lint`
-- Create a server (https://localhost:8080/):
+- Create a server [localhost:8080](http://localhost:8080/):
   - `npm run start`
 
 ## Questionnaire
