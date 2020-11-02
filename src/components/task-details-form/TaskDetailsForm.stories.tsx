@@ -1,4 +1,5 @@
 import React from "react";
+import { action } from "@storybook/addon-actions";
 import TaskDetailsForm from "./TaskDetailsForm";
 
 export default {
@@ -11,7 +12,7 @@ export const Basic = (): JSX.Element => (
     onSubmit={event => {
       event.preventDefault();
 
-      console.log(event.target);
+      action("onSubmit");
     }}
   />
 );

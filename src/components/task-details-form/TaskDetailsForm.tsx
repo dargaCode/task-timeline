@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./TaskDetailsForm.module.scss";
 
 interface Props {
   onSubmit: (event: React.FormEvent) => void;
@@ -32,7 +33,12 @@ export default class TaskDetailsForm extends React.Component<Props, State> {
     return (
       <div>
         <form onSubmit={onSubmit}>
-          <div>
+          {/* define via prop later, for edit */}
+          <h2>Create Task</h2>
+
+          <div className={styles.inputGroup}>
+            {/* false positive */}
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="name">Name:</label>
             <input
               id="name"
@@ -43,7 +49,9 @@ export default class TaskDetailsForm extends React.Component<Props, State> {
             />
           </div>
 
-          <div>
+          <div className={styles.inputGroup}>
+            {/* false positive */}
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="startDate">Start Date:</label>
             <input
               id="startDate"
@@ -54,7 +62,9 @@ export default class TaskDetailsForm extends React.Component<Props, State> {
             />
           </div>
 
-          <div>
+          <div className={styles.inputGroup}>
+            {/* false positive */}
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="endDate">End Date:</label>
             <input
               id="endDate"
@@ -65,7 +75,9 @@ export default class TaskDetailsForm extends React.Component<Props, State> {
             />
           </div>
 
-          <input type="submit" value="Submit" />
+          <div className={styles.footer}>
+            <input type="submit" value="Submit" />
+          </div>
         </form>
       </div>
     );
