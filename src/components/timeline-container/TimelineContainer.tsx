@@ -118,7 +118,6 @@ export default class TimelineContainer extends React.Component<{}, State> {
 
     return (
       <div>
-        <h1>Task Timeline</h1>
         <Timeline
           tasks={tasks}
           columnDates={columnDates || []}
