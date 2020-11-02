@@ -2,33 +2,33 @@
 
 ## NPM scripts
 
-> npm install
-
-Install dependencies
-
-> npm run start
-
-Create a server at https://localhost:8080/
-
-> npm run test
-
-Run all jest tests
-
-> npm run lint
-
-Run eslint, prettier, and stylelint for all files.
+- Install dependencies:
+  - `npm install`
+- Run all jest tests:
+  - `npm run test`
+- Run eslint and prettier:
+  - `npm run lint`
+- Create a server (https://localhost:8080/):
+  - `npm run start`
 
 ## Questionnaire
 
 #### How long did you spend?
 
-This project is in a pretty unfinished state, and I plan to complete it as a fully fleshed-out project.
+Before starting this test, I decided it would be fun to fully flesh it out as a project.
 
-Unfortunately ended up overbooked with interviews and another test this week, so I wasn't able to spend as much time as I was intending. I had planned to really over-deliver on this project, which is why the initial aspects are very thoroughly done, and the React components themselves are basically prototypes.
+I'd say I'm 20+ hours into working on it at this point. Part of the reason it took so long to get in a "shippable" state as a test is that I front-loaded a lot of tests, mocks, utils, etc.
 
-I spent 10-12 hours on this project, if I include code, tests, mock data, etc. I was actually hoping to spend around 20 hours, and end up with a very polished result.
+For the past few months I've been building out [my own homegrown project template](https://github.com/dargaCode/webpack-react-template), using:
 
-I should also note that I copied my Webpack build/setup from my template repo which I've been building from scratch over time: https://github.com/dargaCode/webpack-react-template
+- Webpack
+- React
+- TypeScript
+- SCSS
+- Jest
+- Eslint etc
+
+I build this project on top of my template, and during this project I've been finding more improvements that I need to make to it.
 
 #### What do you like about your implementation?
 
@@ -44,11 +44,15 @@ Ultimately I think this style of working is representative of how I am as a team
 
 Of course all of those ways of working take a lot longer than a more quick and dirty prototype, which I think is what's usually intended for tests like this.
 
-I would have kept my week lighter in terms of other interviews and tests which ended up eating into the time I had allotted for this.
+One thing that caused a lot of wasted time was that I was overly concerned with rendering the provided Starting Data correctly, so I used it in all of my mocks. That made creating and maintaining the mocks much more complicated and time-consuming than it needed to be. In retrospect, I could have validated my test functionality with much simpler data, and then tested against the Starting Data specifically later on.
+
+I learned this lesson partway through the project, and you can see that my mock data for `TaskScheduler.remove()` are a lot simpler than those for the rest of the class.
 
 One of the first things I could have de-scoped was writing and testing my own SortedList component, which was really just for fun. Same with some of the more thorough test coverage.
 
-On the other hand, I usually use Storybook to build my components, which isn't represented here.
+I also would have kept my week lighter in terms of other tests and interviews, so I could have started and finished this project sooner.
+
+On the other hand, I usually use Storybook and TDD to build my components, which isn't represented here.
 
 #### How did you make your design decisions?
 
@@ -56,9 +60,7 @@ See Detailed Development Notes below.
 
 #### How would you test this?
 
-I practice TDD when I'm writing production code, so you can see several jest files which give examples of that. I specced out 40 tests for the SortedList, TaskScheduler, and some Utilities, 27 of which I fully implemented and 13 are TODO.
-
-As I continue working on this project, I'll add similar test coverage for all the React components I write. Those are only unit tests though, so we could eventually add some end-to-end integration tests in Selenium.
+I practice TDD when I'm writing production code, so you can see several jest files which give examples of that. I specced out 60, 54 of which are now implemented. In the interest of turning in this test I haven't created tests for my React components yet, but the tests for the logical classes are a good example of my style.
 
 # Detailed Development Notes
 
@@ -160,6 +162,8 @@ All done with the non-react classes, time to make the visuals.
 
 ### Brainstorming functionality
 
+**Note: this brainstorm is somewhat different from the structure I ended up with, but I thought it would be valuable to show my thought process when starting out.**
+
 - Overall timeline
 
   - contains lanes
@@ -198,9 +202,7 @@ All done with the non-react classes, time to make the visuals.
     - delete
     - cancel / deselect
 
-### Actual components
-
-TimelineContainer
+**TimelineContainer**
 
 - fetch starting tasks
   - in a real app this would be an api call
@@ -216,7 +218,7 @@ TimelineContainer
   - TimelineTable
   - Add/Edit form
 
-TimelineGrid
+**TimelineGrid**
 
 - control zoom / scroll in the future
 - convert task start/end/lane to grid coordinates
@@ -231,7 +233,7 @@ TimelineGrid
 - children
   - tasks
 
-Task
+**Task**
 
 - props
   - color
