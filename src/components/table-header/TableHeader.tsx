@@ -3,7 +3,8 @@ import moment from "moment";
 import styles from "./TableHeader.module.scss";
 import {
   DATE_FORMAT_TIMELINE_MONTH,
-  DATE_FORMAT_TIMELINE_DATE
+  DATE_FORMAT_TIMELINE_DATE,
+  DATE_FORMAT
 } from "../../utils/dateConstants";
 
 interface Props {
@@ -22,15 +23,16 @@ function getMonthText(date: moment.Moment, dateIndex: number): string {
 function getMonthItems(columnDates: moment.Moment[]): JSX.Element[] {
   return columnDates.map((date, i) => {
     const monthText = getMonthText(date, i);
+    const dateString = date.format(DATE_FORMAT);
 
     // todo these empty objects are wasteful, convert to reduce or forEach
     if (!monthText) {
-      return <div key={date.dayOfYear()} />;
+      return <div key={dateString} />;
     }
 
     return (
       <div
-        key={date.dayOfYear()}
+        key={dateString}
         className={styles.month}
         style={{
           gridColumnStart: `${i + 1}`
@@ -45,7 +47,7 @@ function getMonthItems(columnDates: moment.Moment[]): JSX.Element[] {
 function getDayItems(columnDates: moment.Moment[]): JSX.Element[] {
   return columnDates.map(date => {
     return (
-      <div key={date.dayOfYear()} className={styles.day}>
+      <div key={date.format(DATE_FORMAT)} className={styles.day}>
         {date.format(DATE_FORMAT_TIMELINE_DATE)}
       </div>
     );
