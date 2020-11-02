@@ -46,11 +46,9 @@ export default class TimelineContainer extends React.Component<{}, State> {
   handleTaskCreate = (event: React.FormEvent): void => {
     event.preventDefault();
 
-    // make sure .id is accessible
+    // make sure .value is accessible
     const target = event.target as HTMLFormElement;
-
     const { name, startDate, endDate } = target.value;
-
     const taskData: RawTaskData = {
       name,
       start: startDate,
@@ -124,7 +122,6 @@ export default class TimelineContainer extends React.Component<{}, State> {
           columnCount={totalDays || 0}
           onTaskDelete={this.handleTaskDelete}
         />
-
         <TaskDetailsForm onSubmit={this.handleTaskCreate} />
       </div>
     );
