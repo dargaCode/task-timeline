@@ -21,6 +21,10 @@ h2 {
 
   input {
     max-width: 135px;
+
+    &:invalid {
+      background: lightpink;
+    }
   }
 }
 
