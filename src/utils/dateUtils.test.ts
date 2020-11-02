@@ -8,7 +8,8 @@ import {
 import {
   getOneDayAfter,
   getNSequentialDaysFromStart,
-  getDateRangeInclusiveDayCount
+  getDateRangeInclusiveDayCount,
+  isDateRangeValid
 } from "./dateUtils";
 import { DATE_FORMAT } from "./dateConstants";
 
@@ -44,6 +45,26 @@ describe("dateUtils", () => {
       const range = getDateRangeInclusiveDayCount(DATE_A, DATE_B);
 
       expect(range).toBe(INCLUSIVE_DATE_RANGE_A_TO_B);
+    });
+  });
+
+  describe("isDateRangeValid", () => {
+    describe("when startDate is after endDate", () => {
+      it("should return false", () => {
+        expect(isDateRangeValid(DATE_B, DATE_A)).toBe(false);
+      });
+    });
+
+    describe("when startDate is before endDate", () => {
+      it("should return true", () => {
+        expect(isDateRangeValid(DATE_A, DATE_B)).toBe(true);
+      });
+    });
+
+    describe("when startDate the same as endDate", () => {
+      it("should return true", () => {
+        expect(isDateRangeValid(DATE_A, DATE_A)).toBe(true);
+      });
     });
   });
 });

@@ -41,3 +41,15 @@ export function getDateRangeInclusiveDayCount(
   // inclusive of both start and end dates
   return 1 + endDate.diff(startDate, "days");
 }
+
+/**
+ * return false if the end is before the beginning
+ * @param startDate
+ * @param endDate
+ */
+export function isDateRangeValid(
+  startDate: moment.Moment,
+  endDate: moment.Moment
+): boolean {
+  return endDate.isSameOrAfter(startDate);
+}

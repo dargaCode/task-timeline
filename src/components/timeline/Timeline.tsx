@@ -3,7 +3,10 @@ import moment from "moment";
 import { Task } from "../../classes/task-scheduler/taskSchedulerUtils";
 import TaskCard from "../task-card/TaskCard";
 import styles from "./Timeline.module.scss";
-import DateHeaderRow from "../date-header-row/DateHeaderRow";
+import TableHeader from "../table-header/TableHeader";
+
+// eslint-disable-next-line spellcheck/spell-checker
+const COLUMN_WIDTH = "85px";
 
 interface Props {
   tasks: Task[];
@@ -18,13 +21,16 @@ interface Props {
  */
 export default function Timeline(props: Props): JSX.Element {
   const { tasks, columnDates, columnCount, onTaskDelete } = props;
-
-  const gridColumnsSetting = `repeat(${columnCount}, 5%)`;
+  const gridColumnsSetting = `repeat(${columnCount}, ${COLUMN_WIDTH})`;
 
   return (
+    // false positive
+    // eslint-disable-next-line css-modules/no-undef-class
     <div className={styles.container}>
+      <h1>Task Timeline</h1>
+
       <div className={styles.timeline}>
-        <DateHeaderRow
+        <TableHeader
           columnDates={columnDates}
           gridColumnsSetting={gridColumnsSetting}
         />

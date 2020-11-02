@@ -1,9 +1,11 @@
 import React from "react";
 import moment from "moment";
-import styles from "./DateHeaderRow.module.scss";
+import styles from "./TableHeader.module.scss";
 import {
-  DATE_FORMAT_TIMELINE_MONTH,
-  DATE_FORMAT_TIMELINE_DATE
+  DATE_FORMAT_TIMELINE_DATE,
+  DATE_FORMAT,
+  DATE_FORMAT_YEAR,
+  DATE_FORMAT_MONTH
 } from "../../utils/dateConstants";
 
 interface Props {
@@ -11,48 +13,47 @@ interface Props {
   gridColumnsSetting: string;
 }
 
-function getMonthText(date: moment.Moment, dateIndex: number): string {
-  const dayOfMonth = date.date();
-
-  return dayOfMonth === 1 || dateIndex === 0
-    ? date.format(DATE_FORMAT_TIMELINE_MONTH)
-    : "";
-}
-
+/**
+ * create an element for the first date in the timeline,
+ * as well as for the first of every month
+ * @param columnDates
+ */
 function getMonthItems(columnDates: moment.Moment[]): JSX.Element[] {
-  return columnDates.map((date, i) => {
-    const monthText = getMonthText(date, i);
+  const monthItems: JSX.Element[] = [];
 
-    // todo these empty objects are wasteful, convert to reduce or forEach
-    if (!monthText) {
-      return <div key={date.dayOfYear()} />;
+  columnDates.forEach((date, i) => {
+    const needMonth = date.date() === 1 || i === 0;
+
+    if (needMonth) {
+      monthItems.push(
+        <div
+          key={date.format(DATE_FORMAT)}
+          className={styles.month}
+          style={{
+            gridColumnStart: `${i + 1}`
+          }}
+        >
+          <div>{date.format(DATE_FORMAT_YEAR)}</div>
+          <div>{date.format(DATE_FORMAT_MONTH)}</div>
+        </div>
+      );
     }
-
-    return (
-      <div
-        key={date.dayOfYear()}
-        className={styles.month}
-        style={{
-          gridColumnStart: `${i + 1}`
-        }}
-      >
-        {monthText}
-      </div>
-    );
   });
+
+  return monthItems;
 }
 
 function getDayItems(columnDates: moment.Moment[]): JSX.Element[] {
   return columnDates.map(date => {
     return (
-      <div key={date.dayOfYear()} className={styles.day}>
+      <div key={date.format(DATE_FORMAT)} className={styles.day}>
         {date.format(DATE_FORMAT_TIMELINE_DATE)}
       </div>
     );
   });
 }
 
-export default function DateHeaderRow(props: Props): JSX.Element {
+export default function TableHeader(props: Props): JSX.Element {
   const { columnDates, gridColumnsSetting } = props;
 
   return (

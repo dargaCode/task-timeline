@@ -1,9 +1,5 @@
 @use "../../config";
 
-.container {
-  margin: 40px;
-}
-
 .timeline {
   background: #bbb;
   font-size: 15px;
@@ -13,5 +9,6 @@
 .grid {
   display: grid;
   grid-row-gap: 10px;
+  min-height: 48px;
   padding: 10px 0;
 }

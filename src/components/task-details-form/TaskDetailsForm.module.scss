@@ -1,0 +1,52 @@
+@use "../../config";
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+// todo delete me
+.notes {
+  min-width: 500px;
+  h3 {
+    margin: 0 0 6px;
+  }
+  ol {
+    margin: 0;
+  }
+}
+
+form {
+  background: lightgray;
+  max-width: 350px;
+  padding: 20px 40px;
+}
+
+h2 {
+  margin: 0 0 20px;
+}
+
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+
+  label {
+    font-size: 15px;
+  }
+
+  input {
+    max-width: 135px;
+
+    &:invalid {
+      background: lightpink;
+    }
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
