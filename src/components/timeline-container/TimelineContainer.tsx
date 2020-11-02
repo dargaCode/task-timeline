@@ -37,9 +37,19 @@ export default class TimelineContainer extends React.Component<{}, State> {
     this.fetchTasks();
   }
 
-  handleTaskDelete = (event: React.MouseEvent): void => {
+  /**
+   * delete the event if user presses delete key while focused, or clicks the div
+   * @param event
+   */
+  handleTaskDelete = (event: React.MouseEvent | React.KeyboardEvent): void => {
     event.preventDefault();
 
+    // ignore non-delete keys
+    if ("key" in event && event.key !== "Backspace") {
+      return;
+    }
+
+    // make sure .id is accessible
     const target = event.target as HTMLDivElement;
 
     if (this.scheduler) {

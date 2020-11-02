@@ -9,7 +9,7 @@ interface Props {
   tasks: Task[];
   columnDates: moment.Moment[];
   columnCount: number;
-  onTaskDelete: (event: React.MouseEvent) => void;
+  onTaskDelete: (event: React.MouseEvent | React.KeyboardEvent) => void;
 }
 
 /**

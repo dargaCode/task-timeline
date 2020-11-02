@@ -4,7 +4,7 @@ import { Task } from "../../classes/task-scheduler/taskSchedulerUtils";
 
 interface Props {
   task: Task;
-  onTaskDelete: (event: React.MouseEvent) => void;
+  onTaskDelete: (event: React.MouseEvent | React.KeyboardEvent) => void;
 }
 
 /**
@@ -12,7 +12,7 @@ interface Props {
  */
 export default function TaskCard(props: Props): JSX.Element {
   const { task, onTaskDelete } = props;
-  const { name, laneIndex, id, startDateIndex, endDateIndex } = task;
+  const { name, laneIndex, id, startDateIndex, endDateIndex, sortIndex } = task;
   const taskRow = laneIndex + 1;
   const startColumn = startDateIndex + 1;
   const endColumn = endDateIndex + 1;
@@ -26,9 +26,11 @@ export default function TaskCard(props: Props): JSX.Element {
         gridColumnStart: `${startColumn}`,
         gridColumnEnd: `${endColumn}`
       }}
-      role="button"
-      onMouseDown={onTaskDelete}
       id={id.toString()}
+      role="button"
+      tabIndex={sortIndex + 1}
+      onMouseDown={onTaskDelete}
+      onKeyUp={onTaskDelete}
     >
       {name}
     </div>
