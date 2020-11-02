@@ -21,27 +21,27 @@ function getMonthText(date: moment.Moment, dateIndex: number): string {
 }
 
 function getMonthItems(columnDates: moment.Moment[]): JSX.Element[] {
-  return columnDates.map((date, i) => {
+  const monthItems: JSX.Element[] = [];
+
+  columnDates.forEach((date, i) => {
     const monthText = getMonthText(date, i);
-    const dateString = date.format(DATE_FORMAT);
 
-    // todo these empty objects are wasteful, convert to reduce or forEach
-    if (!monthText) {
-      return <div key={dateString} />;
+    if (monthText) {
+      monthItems.push(
+        <div
+          key={date.format(DATE_FORMAT)}
+          className={styles.month}
+          style={{
+            gridColumnStart: `${i + 1}`
+          }}
+        >
+          {monthText}
+        </div>
+      );
     }
-
-    return (
-      <div
-        key={dateString}
-        className={styles.month}
-        style={{
-          gridColumnStart: `${i + 1}`
-        }}
-      >
-        {monthText}
-      </div>
-    );
   });
+
+  return monthItems;
 }
 
 function getDayItems(columnDates: moment.Moment[]): JSX.Element[] {
