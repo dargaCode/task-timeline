@@ -177,8 +177,22 @@ export default class TaskScheduler {
     // prevent new lanes from being appended to old lanes
     this.scheduledLanes = [];
 
+    const tasks = this.sortedTaskList.items;
+
+    // allow the schedule to update when the last item has just been removed
+    if (tasks.length === 0) {
+      this.scheduledTasks = [];
+      this.scheduledDateRange = {
+        startDate: undefined,
+        endDate: undefined,
+        totalDays: undefined
+      };
+
+      return;
+    }
+
     // as tasks were spliced into the list, their sortIndices were not updated
-    const sortedTasks = updateSortIndices(this.sortedTaskList.items);
+    const sortedTasks = updateSortIndices(tasks);
     // the first task will always have the earliest startDate.
     // we need this index immediately to assign tasks' date indexes.
     // this will ultimately be what defines the grid column range for each task.

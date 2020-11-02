@@ -308,6 +308,30 @@ describe("TaskScheduler", () => {
         expect(scheduler.dateRange).toEqual(REMOVE_TASKS_DECREASED_DATE_RANGE);
       });
     });
+
+    describe("when deleting the last task", () => {
+      beforeEach(() => {
+        // any random task is find here
+        scheduler = new TaskScheduler([ADD_TASK_DATA_NO_NEW_LANE]);
+      });
+
+      it("should update its tasks to be empty", () => {
+        scheduler.remove(1);
+
+        expect(scheduler.tasks).toEqual([]);
+      });
+
+      it("should update its lanes to be empty", () => {
+        scheduler.remove(1);
+
+        expect(scheduler.lanes).toEqual([]);
+      });
+      it("should update its date range to be empty", () => {
+        scheduler.remove(1);
+
+        expect(scheduler.dateRange).toEqual(EMPTY_DATE_RANGE);
+      });
+    });
   });
 
   describe(".modify()", () => {

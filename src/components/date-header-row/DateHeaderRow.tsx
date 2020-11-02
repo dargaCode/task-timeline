@@ -23,8 +23,9 @@ function getMonthItems(columnDates: moment.Moment[]): JSX.Element[] {
   return columnDates.map((date, i) => {
     const monthText = getMonthText(date, i);
 
+    // todo these empty objects are wasteful, convert to reduce or forEach
     if (!monthText) {
-      return <></>;
+      return <div key={date.dayOfYear()} />;
     }
 
     return (

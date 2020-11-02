@@ -9,6 +9,7 @@ interface Props {
   tasks: Task[];
   columnDates: moment.Moment[];
   columnCount: number;
+  onTaskDelete: (event: React.MouseEvent | React.KeyboardEvent) => void;
 }
 
 /**
@@ -16,7 +17,7 @@ interface Props {
  * the tasks themselves.
  */
 export default function Timeline(props: Props): JSX.Element {
-  const { tasks, columnDates, columnCount } = props;
+  const { tasks, columnDates, columnCount, onTaskDelete } = props;
 
   const gridColumnsSetting = `repeat(${columnCount}, 5%)`;
 
@@ -34,7 +35,9 @@ export default function Timeline(props: Props): JSX.Element {
           }}
         >
           {tasks.map(task => {
-            return <TaskCard key={task.id} task={task} />;
+            return (
+              <TaskCard key={task.id} task={task} onTaskDelete={onTaskDelete} />
+            );
           })}
         </div>
       </div>
