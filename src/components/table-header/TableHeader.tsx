@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import styles from "./DateHeaderRow.module.scss";
+import styles from "./TableHeader.module.scss";
 import {
   DATE_FORMAT_TIMELINE_MONTH,
   DATE_FORMAT_TIMELINE_DATE
@@ -52,7 +52,7 @@ function getDayItems(columnDates: moment.Moment[]): JSX.Element[] {
   });
 }
 
-export default function DateHeaderRow(props: Props): JSX.Element {
+export default function TableHeader(props: Props): JSX.Element {
   const { columnDates, gridColumnsSetting } = props;
 
   return (

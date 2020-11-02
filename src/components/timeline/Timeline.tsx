@@ -3,7 +3,7 @@ import moment from "moment";
 import { Task } from "../../classes/task-scheduler/taskSchedulerUtils";
 import TaskCard from "../task-card/TaskCard";
 import styles from "./Timeline.module.scss";
-import DateHeaderRow from "../date-header-row/DateHeaderRow";
+import TableHeader from "../table-header/TableHeader";
 
 interface Props {
   tasks: Task[];
@@ -28,7 +28,7 @@ export default function Timeline(props: Props): JSX.Element {
       <h2>Task Timeline</h2>
 
       <div className={styles.timeline}>
-        <DateHeaderRow
+        <TableHeader
           columnDates={columnDates}
           gridColumnsSetting={gridColumnsSetting}
         />
