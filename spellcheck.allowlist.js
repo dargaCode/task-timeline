@@ -109,6 +109,7 @@ module.exports = [
   "ttf",
   "typecheck",
   "ui",
+  "undef",
   "unhandled",
   "unmount",
   "unshift",
