@@ -1,11 +1,7 @@
 import React from "react";
 
-interface Props {}
-
-interface State {}
-
-export default class TaskAddModal extends React.Component<Props, State> {
-  constructor(props: Props) {
+export default class TaskAddModal extends React.Component<{}, {}> {
+  constructor(props: {}) {
     super(props);
 
     this.state = {};
