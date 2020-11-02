@@ -15,6 +15,9 @@ import {
 import Timeline from "../timeline/Timeline";
 import TaskDetailsForm from "../task-details-form/TaskDetailsForm";
 
+// for zero state and very short date ranges, to look less weird
+const MINIMUM_RENDERED_DAYS = 15;
+const DEFAULT_START_DATE = moment("2018-01-01", DATE_FORMAT);
 /**
  *  todo restricting date ranges until pagination is in.
  *  otherwise the app seems to hit the limit or maximum grid size or
@@ -127,20 +130,26 @@ export default class TimelineContainer extends React.Component<{}, State> {
 
   render(): JSX.Element {
     const { tasks, dateRange } = this.state;
-    const { startDate, totalDays } = dateRange;
+    const startDate = dateRange.startDate || DEFAULT_START_DATE;
 
-    let columnDates;
+    let totalDays;
 
-    if (startDate && totalDays) {
-      columnDates = getNSequentialDaysFromStart(startDate, totalDays);
+    // short date range
+    if (dateRange.totalDays) {
+      totalDays = Math.max(dateRange.totalDays, MINIMUM_RENDERED_DAYS);
+    } else {
+      // zero state
+      totalDays = MINIMUM_RENDERED_DAYS;
     }
+
+    const columnDates = getNSequentialDaysFromStart(startDate, totalDays);
 
     return (
       <div>
         <Timeline
           tasks={tasks}
-          columnDates={columnDates || []}
-          columnCount={totalDays || 0}
+          columnDates={columnDates}
+          columnCount={totalDays}
           onTaskDelete={this.handleTaskDelete}
         />
         <TaskDetailsForm
